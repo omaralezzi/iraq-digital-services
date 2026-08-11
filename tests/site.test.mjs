@@ -1,0 +1,96 @@
+import assert from "node:assert/strict";
+import { access, readFile } from "node:fs/promises";
+import test from "node:test";
+
+const root = new URL("../", import.meta.url);
+const read = (path) => readFile(new URL(path, root), "utf8");
+
+test("central settings preserve verified provider identity and placeholders", async () => {
+  const settings = await read("src/content/siteSettings.ts");
+  assert.match(settings, /Omar Al‑Ezzi/);
+  assert.match(settings, /Vautierstr\. 57/);
+  assert.match(settings, /\[PROJECT_NAME\]/);
+  assert.match(settings, /\[NEW_BUSINESS_EMAIL\]/);
+  assert.match(settings, /\[VERIFY: Einzelunternehmer \/ Freiberufler \/ other\]/);
+  assert.doesNotMatch(settings, /ArabVergleich/);
+});
+
+test("Arabic, English, services, industries and legal routes are data-driven", async () => {
+  const [services, industries, legal, localeLayout] = await Promise.all([
+    read("src/content/services.ts"), read("src/content/industries.ts"),
+    read("src/content/legalContent.ts"), read("app/[locale]/layout.tsx"),
+  ]);
+  assert.match(services, /automation/);
+  assert.match(industries, /clinics/);
+  assert.match(legal, /§ 5 DDG/);
+  assert.match(legal, /§ 25 TDDDG/);
+  assert.match(localeLayout, /LocaleRuntime/);
+});
+
+test("every service and industry detail page includes a contextual interactive demo", async () => {
+  const [demos, preview, expandedPreview, servicePage, industryPage] = await Promise.all([
+    read("src/content/contextDemos.ts"),
+    read("src/components/DomainPreview.tsx"),
+    read("src/components/ExpandedIndustryPreview.tsx"),
+    read("app/[locale]/services/[slug]/page.tsx"),
+    read("app/[locale]/industries/[slug]/page.tsx"),
+  ]);
+  const serviceSlugs = ["websites", "web-apps", "commerce", "management-systems", "booking-crm", "automation", "performance-care"];
+  const originalIndustrySlugs = ["clinics", "restaurants", "retail", "construction", "consulting", "travel", "education", "maintenance", "distribution", "startups"];
+  const expandedIndustrySlugs = [
+    "law-firms", "private-schools", "kindergartens", "medical-labs", "pharmacies", "sports-clubs", "beauty-salons", "accounting",
+    "architecture", "recruitment", "training-institutes", "automotive", "logistics", "hospitality", "events", "manufacturing", "insurance", "religious-travel",
+  ];
+  const industrySlugs = [...originalIndustrySlugs, ...expandedIndustrySlugs];
+  for (const slug of [...serviceSlugs, ...industrySlugs]) {
+    assert.match(demos, new RegExp(`(?:\\"|\\s)${slug}(?:\\"|:)`));
+  }
+  for (const slug of [...serviceSlugs, ...originalIndustrySlugs]) if (slug !== "startups") assert.match(preview, new RegExp(`slug === \\"${slug}\\"`));
+  for (const slug of expandedIndustrySlugs) assert.match(expandedPreview, new RegExp(`\\"${slug}\\"`));
+  assert.match(preview, /startup-preview/);
+  assert.match(preview, /ExpandedIndustryPreview/);
+  assert.match(preview, /setStep/);
+  assert.match(preview, /setSelected/);
+  assert.match(preview, /setCount/);
+  assert.match(preview, /نقل المشروع إلى قيد التنفيذ/);
+  const gallery = await read("src/components/StaticDesignGallery.tsx");
+  assert.match(gallery, /static-design-grid/);
+  assert.match(gallery, /نموذج موقع توضيحي/);
+  assert.match(gallery, /PhotoWebsiteArtwork/);
+  assert.match(gallery, /photoSiteCopy/);
+  assert.match(gallery, /SpecialtyArtwork/);
+  assert.match(gallery, /photoAssets/);
+  for (const slug of [...serviceSlugs, ...industrySlugs]) assert.match(gallery, new RegExp(`(?:\\"|\\s)${slug}(?:\\"|:)`));
+  for (const asset of ["retail-products.webp", "restaurant-menu.webp", "iraqi-commerce.webp", "travel-destinations.webp", "construction-projects.webp"]) await access(new URL(`public/demo-assets/${asset}`, root));
+  const industryImages = await read("src/content/industryImages.ts");
+  for (const slug of ["law-firms", "private-schools", "kindergartens", "medical-labs", "pharmacies", "sports-clubs", "beauty-salons", "accounting", "architecture", "recruitment", "training-institutes", "automotive", "logistics", "hospitality", "events", "manufacturing", "insurance", "religious-travel"]) {
+    assert.match(industryImages, new RegExp(`\\"${slug}\\"|${slug}:`));
+  }
+  assert.match(expandedPreview, /ep-sector-photo/);
+  assert.match(gallery, /industryImages/);
+  assert.match(servicePage, /ContextDemo.+kind="service"/s);
+  assert.match(industryPage, /ContextDemo.+kind="industry"/s);
+  assert.match(demos, /عيادة الشفاء/);
+  assert.match(demos, /مقهى النخلة/);
+});
+
+test("forms include server validation, honeypot, consent and rate limiting", async () => {
+  const [contact, project, security] = await Promise.all([
+    read("app/api/contact/route.ts"), read("app/api/project/route.ts"), read("src/lib/formSecurity.ts"),
+  ]);
+  for (const source of [contact, project]) {
+    assert.match(source, /input\.website/);
+    assert.match(source, /rateLimited/);
+    assert.match(source, /consent/);
+    assert.match(source, /crypto\.randomUUID/);
+    assert.match(source, /429/);
+  }
+  assert.match(security, /replace\(/);
+});
+
+test("starter preview markers and dependency are removed", async () => {
+  const [page, layout, pkg] = await Promise.all([read("app/page.tsx"), read("app/layout.tsx"), read("package.json")]);
+  assert.doesNotMatch(page, /SkeletonPreview|codex-preview/);
+  assert.doesNotMatch(layout, /Starter Project|codex-preview/);
+  assert.doesNotMatch(pkg, /react-loading-skeleton/);
+});
