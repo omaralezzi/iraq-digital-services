@@ -33,7 +33,8 @@ export function InstallAppPrompt({ locale }: { locale: Locale }) {
 
   useEffect(() => {
     if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => undefined);
-    if (isStandalone() || sessionStorage.getItem("installSuggestionDismissed")) return;
+    const localPreview = window.location.hostname === "localhost" && new URLSearchParams(window.location.search).get("install-preview") === "1";
+    if (!localPreview && (isStandalone() || sessionStorage.getItem("installSuggestionDismissed"))) return;
 
     const reveal = window.setTimeout(() => setVisible(true), 650);
     const capturePrompt = (event: Event) => {
