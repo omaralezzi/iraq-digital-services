@@ -90,7 +90,7 @@ export function ProcessAndTrust({ locale }: { locale: Locale }) {
 
     <section id="why" className="section why-section">
       <div className="container why-layout">
-        <div><span className="eyebrow">{ar ? "لماذا هذا الأسلوب؟" : "Why this approach?"}</span><h2>{ar ? "تقنية تناسب العمل، لا استعراضًا تقنيًا." : "Technology that fits the business—not a technical showcase."}</h2><p>{ar ? "هدفنا أن تعرف ما الذي ستحصل عليه، ولماذا تحتاج إليه، وكيف يمكن تطويره مستقبلًا." : "You should know what you will receive, why it matters and how it can grow later."}</p></div>
+        <div><span className="eyebrow">{ar ? "لماذا هذا الأسلوب؟" : "Why this approach?"}</span><h2>{ar ? "تقنية تناسب العمل، لا استعراضًا تقنيًا." : "Technology that fits the business—not a technical showcase."}</h2><p>{ar ? "هدفنا أن تعرف ما الذي ستحصل عليه، ولماذا تحتاج إليه، وكيف يمكن تطويره مستقبلًا." : "You should know what you will receive, why it matters and how it can grow later."}</p><div className="why-experience"><span>2001—2026</span><p>{ar ? "خبرة تمتد إلى 25 عامًا في البرمجة وتطوير الأنظمة، تساعدنا على اختيار التقنية المناسبة وبناء حل يمكن صيانته وتطويره مستقبلًا." : "Twenty-five years in programming and systems development help us choose the right technology and build a solution that remains maintainable and ready to grow."}</p></div></div>
         <div className="why-list">{why.map((item, i) => <div key={item}><span>{String(i + 1).padStart(2, "0")}</span><b>{item}</b><i>✓</i></div>)}</div>
       </div>
       <div className="container rep-cta">
