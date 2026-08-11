@@ -94,3 +94,22 @@ test("starter preview markers and dependency are removed", async () => {
   assert.doesNotMatch(layout, /Starter Project|codex-preview/);
   assert.doesNotMatch(pkg, /react-loading-skeleton/);
 });
+
+test("the site can be installed across supported desktop and mobile browsers", async () => {
+  const [manifest, layout, runtime, prompt, worker] = await Promise.all([
+    read("app/manifest.ts"),
+    read("app/layout.tsx"),
+    read("src/components/LocaleRuntime.tsx"),
+    read("src/components/InstallAppPrompt.tsx"),
+    read("public/sw.js"),
+  ]);
+  assert.match(manifest, /display: "standalone"/);
+  assert.match(manifest, /app-icon-192\.png/);
+  assert.match(manifest, /app-icon-512\.png/);
+  assert.match(layout, /appleWebApp/);
+  assert.match(runtime, /InstallAppPrompt/);
+  assert.match(prompt, /beforeinstallprompt/);
+  assert.match(prompt, /إضافة إلى الشاشة الرئيسية/);
+  assert.match(worker, /addEventListener\("fetch"/);
+  for (const icon of ["app-icon-192.png", "app-icon-512.png", "apple-touch-icon.png"]) await access(new URL(`public/${icon}`, root));
+});

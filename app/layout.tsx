@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Noto_Kufi_Arabic, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
@@ -19,7 +19,19 @@ const latin = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: { default: "حلول رقمية للسوق العراقي", template: "%s | حلول رقمية للعراق" },
   description: "مواقع وتطبيقات وأنظمة وأتمتة أعمال موجّهة للعراق، تُدار وتُنفّذ من ألمانيا مع تواصل واضح بالعربية.",
+  applicationName: "حلول رقمية للعراق",
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [
+      { url: "/app-icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/app-icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
+  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "حلول العراق" },
 };
+
+export const viewport: Viewport = { themeColor: "#081827", colorScheme: "dark" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
