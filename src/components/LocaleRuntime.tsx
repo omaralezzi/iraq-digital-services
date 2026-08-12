@@ -8,6 +8,9 @@ import { InstallAppPrompt } from "@/src/components/InstallAppPrompt";
 export function LocaleRuntime({ locale, children }: { locale: Locale; children: React.ReactNode }) {
   const [suggestion, setSuggestion] = useState<Locale | null>(null);
   useEffect(() => {
+    if (!window.location.hash) window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [locale]);
+  useEffect(() => {
     const root = document.documentElement;
     root.lang = locale;
     root.dir = locale === "ar" ? "rtl" : "ltr";

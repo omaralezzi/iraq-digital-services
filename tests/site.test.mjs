@@ -131,3 +131,13 @@ test("the approved sifrsifr.one identity is used across navigation and metadata"
   assert.match(brand, /sifrsifr-one-logo\.svg/);
   assert.doesNotMatch(`${header}\n${footer}`, /wordmark-mark|\[اسم المشروع\]/);
 });
+
+test("home navigation and unanchored locale pages start at the top", async () => {
+  const [header, runtime] = await Promise.all([
+    read("src/components/SiteHeader.tsx"),
+    read("src/components/LocaleRuntime.tsx"),
+  ]);
+  assert.match(header, /window\.scrollTo\(\{ top: 0/);
+  assert.match(header, /window\.history\.replaceState/);
+  assert.match(runtime, /if \(!window\.location\.hash\) window\.scrollTo/);
+});
