@@ -17,12 +17,12 @@ const latin = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: { default: "sifr.one | حلول رقمية للسوق العراقي", template: "%s | sifr.one" },
+  title: { default: "sifrsifr.one | حلول رقمية للسوق العراقي", template: "%s | sifrsifr.one" },
   description: "مواقع وتطبيقات وأنظمة وأتمتة أعمال موجّهة للعراق، تُدار وتُنفّذ من ألمانيا مع تواصل واضح بالعربية.",
-  applicationName: "sifr.one",
+  applicationName: "sifrsifr.one",
   category: "technology",
-  creator: "sifr.one",
-  publisher: "sifr.one",
+  creator: "sifrsifr.one",
+  publisher: "sifrsifr.one",
   manifest: "/manifest.webmanifest",
   icons: {
     icon: [
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     shortcut: [{ url: "/favicon.svg", type: "image/svg+xml" }],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
-  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "sifr.one" },
+  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "sifrsifr.one" },
 };
 
 export const viewport: Viewport = { themeColor: "#081827", colorScheme: "dark" };

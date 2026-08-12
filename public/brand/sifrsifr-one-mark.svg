@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
-  <title id="title">sifr.one 0·1 mark</title>
-  <desc id="desc">The approved navy zero and cyan one joined by a gold dot.</desc>
+  <title id="title">sifrsifr.one 00·1 mark</title>
+  <desc id="desc">Two bold navy zeros joined to a cyan one by a gold dot.</desc>
   <defs>
     <linearGradient id="navy" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0B2545"/>
@@ -16,9 +16,8 @@
     </linearGradient>
   </defs>
   <rect width="1024" height="1024" rx="176" fill="#000"/>
-  <g transform="translate(-157.5 -82) scale(1.092)">
-    <circle cx="503" cy="545" r="196" fill="none" stroke="url(#navy)" stroke-width="106"/>
-    <path fill="url(#cyan)" d="M758 372 878 292h94v504H824V449l-66 46Z"/>
-    <circle cx="756" cy="544" r="50" fill="url(#gold)"/>
-  </g>
+  <circle cx="222" cy="512" r="132" fill="none" stroke="url(#navy)" stroke-width="76"/>
+  <circle cx="552" cy="512" r="132" fill="none" stroke="url(#navy)" stroke-width="76"/>
+  <path fill="url(#cyan)" d="M704 370 834 286h104v486H784V454l-80 52Z"/>
+  <circle cx="712" cy="512" r="47" fill="url(#gold)"/>
 </svg>

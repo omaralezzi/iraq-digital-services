@@ -1,5 +1,5 @@
-const CACHE_PREFIX = "sifr-one-shell-";
-const CACHE_NAME = `${CACHE_PREFIX}v2`;
+const CACHE_PREFIX = "sifrsifr-one-shell-";
+const CACHE_NAME = `${CACHE_PREFIX}v3`;
 const FALLBACK_PAGES = ["/ar", "/en"];
 
 self.addEventListener("install", (event) => {

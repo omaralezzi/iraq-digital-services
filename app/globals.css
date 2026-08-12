@@ -36,14 +36,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .site-header { position: sticky; z-index: 100; top: 0; height: 78px; display: flex; align-items: center; background: rgba(6, 17, 31, .83); border-bottom: 1px solid var(--line); backdrop-filter: blur(18px); }
 .nav-wrap { display: flex; align-items: center; gap: 24px; }
 .wordmark { display: inline-flex; align-items: center; flex: 0 0 auto; border-radius: 12px; }
-.brand-logo { width: 72px; height: 70px; display: grid; grid-template-rows: 49px 18px; place-items: center; overflow: hidden; border-radius: 8px; background: #000; direction: ltr; }
-.brand-logo-mark { position: relative; width: 64px; height: 47px; display: block; }
-.brand-logo-zero { position: absolute; inset: 5px auto auto 3px; width: 39px; height: 39px; border: 9px solid #0b2545; border-radius: 50%; }
-.brand-logo-one { position: absolute; z-index: 1; inset: 3px 3px auto auto; width: 16px; height: 42px; background: #27c8f2; clip-path: polygon(0 18%, 65% 0, 100% 0, 100% 100%, 43% 100%, 43% 30%, 0 42%); }
-.brand-logo-dot { position: absolute; z-index: 2; top: 24px; left: 42px; width: 9px; height: 9px; border-radius: 50%; background: #f4bc50; transform: translate(-50%,-50%); }
-.brand-logo-name { display: flex; align-items: baseline; justify-content: center; color: #0b2545; font: 800 15px/.9 var(--font-latin), sans-serif; letter-spacing: -.07em; }
-.brand-logo-name b,.brand-logo-name strong { font: inherit; }.brand-logo-name strong { color: #27c8f2; }.brand-logo-name i { margin: 0 1px; color: #f4bc50; font: 900 18px/.7 var(--font-latin),sans-serif; }
-.site-header .brand-logo { width: 72px; height: 70px; }
+.brand-logo { width: 86px; height: 72px; display: grid; place-items: center; overflow: hidden; border-radius: 8px; background: #000; direction: ltr; }
+.brand-logo img { width: 100%; height: 100%; display: block; object-fit: contain; }
+.site-header .brand-logo { width: 86px; height: 72px; }
 .site-header .wordmark { margin-block: -2px; }
 .site-header .wordmark:hover .brand-logo { box-shadow: 0 0 16px rgba(39,200,242,.14); }
 .nav-links { display: flex; align-items: center; justify-content: center; gap: 18px; flex: 1; }

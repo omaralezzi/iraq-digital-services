@@ -9,8 +9,8 @@ test("central settings preserve verified provider identity and the approved bran
   const settings = await read("src/content/siteSettings.ts");
   assert.match(settings, /Omar Al‑Ezzi/);
   assert.match(settings, /Vautierstr\. 57/);
-  assert.match(settings, /name: "sifr\.one"/);
-  assert.match(settings, /domain: "sifr\.one"/);
+  assert.match(settings, /name: "sifrsifr\.one"/);
+  assert.match(settings, /domain: "sifrsifr\.one"/);
   assert.doesNotMatch(settings, /\[PROJECT_NAME\]|\[اسم المشروع\]|\[DOMAIN_TO_BE_SELECTED_LATER\]/);
   assert.match(settings, /\[NEW_BUSINESS_EMAIL\]/);
   assert.match(settings, /\[VERIFY: Einzelunternehmer \/ Freiberufler \/ other\]/);
@@ -114,10 +114,10 @@ test("the site can be installed across supported desktop and mobile browsers", a
   assert.match(prompt, /إضافة إلى الشاشة الرئيسية/);
   assert.match(prompt, /app-icon-512\.png/);
   assert.match(worker, /addEventListener\("fetch"/);
-  for (const icon of ["app-icon-192.png", "app-icon-512.png", "apple-touch-icon.png", "favicon.svg", "brand/sifr-one-logo.svg", "brand/sifr-one-mark.svg"]) await access(new URL(`public/${icon}`, root));
+  for (const icon of ["app-icon-192.png", "app-icon-512.png", "apple-touch-icon.png", "favicon.svg", "brand/sifrsifr-one-logo.svg", "brand/sifrsifr-one-mark.svg"]) await access(new URL(`public/${icon}`, root));
 });
 
-test("the approved sifr.one identity is used across navigation and metadata", async () => {
+test("the approved sifrsifr.one identity is used across navigation and metadata", async () => {
   const [header, footer, brand, layout, manifest, home] = await Promise.all([
     read("src/components/SiteHeader.tsx"),
     read("src/components/SiteFooter.tsx"),
@@ -126,8 +126,8 @@ test("the approved sifr.one identity is used across navigation and metadata", as
     read("app/manifest.ts"),
     read("app/[locale]/page.tsx"),
   ]);
-  for (const source of [header, footer, brand, layout, manifest, home]) assert.match(source, /sifr\.one/);
+  for (const source of [header, footer, brand, layout, manifest, home]) assert.match(source, /sifrsifr\.one/);
   assert.match(layout, /favicon\.svg/);
-  assert.match(brand, /brand-logo-zero/);
+  assert.match(brand, /sifrsifr-one-logo\.svg/);
   assert.doesNotMatch(`${header}\n${footer}`, /wordmark-mark|\[اسم المشروع\]/);
 });
