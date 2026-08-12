@@ -1,16 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-labelledby="title desc">
   <title id="title">sifr.one</title>
-  <desc id="desc">The exact bold zero-dot-one mark used by the favicon, above a heavy geometric sifr.one wordmark.</desc>
+  <desc id="desc">A compact square lockup with aligned outer edges: a smaller zero, a larger one, and a heavy geometric sifr.one wordmark.</desc>
 
-  <!-- Exact favicon geometry, enlarged without changing its proportions. -->
-  <g transform="translate(96 65) scale(12)">
-    <circle cx="22" cy="32" r="17" fill="none" stroke="#0A2341" stroke-width="8"/>
-    <path fill="#25C8F2" d="M44 21 52 15h5v34h-7V25l-6 4Z"/>
-    <circle cx="42" cy="32" r="5" fill="#F2B744"/>
-  </g>
+  <!-- Upper mark: outer edges align to the wordmark's 180–840 virtual square. -->
+  <circle cx="325" cy="390" r="112" fill="none" stroke="#0A2341" stroke-width="66"/>
+  <path fill="#25C8F2" d="M510 245 720 150h120v500H650V310L510 410Z"/>
+  <circle cx="500" cy="390" r="42" fill="#F2B744"/>
 
   <!-- Avenir Next Heavy converted to native vector outlines. No font dependency. -->
-  <g transform="translate(315 905) scale(.16 -.16)" fill="#0A2341">
+  <g transform="translate(179.36 865) scale(.16 -.16)" fill="#0A2341">
     <path d="M484 167Q484 114 461.5 78Q439 42 404.5 20.5Q370-1 329-10.5Q288-20 251-20Q183-20 117.5-.5Q52 19 4 55L117 186Q141 164 173.5 150.5Q206 137 236 137Q248 137 258.5 141.5Q269 146 269 158Q269 171 250.5 178.5Q232 186 186 197Q161 203 135 214.5Q109 226 87.5 245Q66 264 52 291.5Q38 319 38 357Q38 408 60.5 444Q83 480 117.5 502.5Q152 525 192.5 535.5Q233 546 269 546Q330 546 390 528Q450 510 498 478L390 349Q365 365 339 374Q313 383 288 383Q271 383 260 378.5Q249 374 249 361Q249 351 261.5 345.5Q274 340 319 331Q350 325 379.5 312.5Q409 300 432.5 280.5Q456 261 470 233Q484 205 484 167Z"/>
     <path transform="translate(513)" d="M54 526H285V0H54ZM50 678Q50 702 59.5 723.5Q69 745 85.5 761Q102 777 124 786.5Q146 796 171 796Q195 796 216 786.5Q237 777 253.5 761Q270 745 279.5 723.5Q289 702 289 678Q289 653 279.5 631.5Q270 610 253.5 594.5Q237 579 216 570Q195 561 171 561Q146 561 124 570Q102 579 85.5 594.5Q69 610 59.5 631.5Q50 653 50 678Z"/>
     <path transform="translate(852)" d="M426 598Q417 602 405 604.5Q393 607 381 607Q347 607 333.5 586Q320 565 320 533V526H431V361H320V0H90V361H0V526H90V538Q90 587 101.5 632Q113 677 141 711.5Q169 746 216.5 766Q264 786 336 786Q359 786 389.5 782.5Q420 779 441 771Z"/>
@@ -18,9 +16,9 @@
   </g>
 
   <!-- The lower gold period sits on the same vertical axis as the mark's gold dot. -->
-  <circle cx="600" cy="862" r="22" fill="#F2B744"/>
+  <circle cx="500" cy="821" r="20" fill="#F2B744"/>
 
-  <g transform="translate(635 905) scale(.16 -.16)" fill="#25C8F2">
+  <g transform="translate(529.88 865) scale(.16 -.16)" fill="#25C8F2">
     <path d="M632 265Q632 197 607.5 144Q583 91 541.5 54.5Q500 18 445.5-1Q391-20 331-20Q272-20 217.5-1Q163 18 122 54.5Q81 91 56.5 144Q32 197 32 265Q32 332 56.5 384.5Q81 437 122 473Q163 509 217.5 527.5Q272 546 331 546Q391 546 445.5 527.5Q500 509 541.5 473Q583 437 607.5 384.5Q632 332 632 265ZM331 352Q293 352 269.5 326Q246 300 246 265Q246 228 270 202Q294 176 332 176Q370 176 394 202Q418 228 418 265Q418 300 393.5 326Q369 352 331 352Z"/>
     <path transform="translate(664)" d="M53 526H278V468H280Q300 497 339.5 518.5Q379 540 430 540Q485 540 521.5 520Q558 500 579.5 468.5Q601 437 609.5 398Q618 359 618 320V0H386V280Q386 320 373.5 336Q361 352 336 352Q313 352 298.5 333.5Q284 315 284 280V0H53Z"/>
     <path transform="translate(1330)" d="M403 333Q403 361 382.5 379Q362 397 327 397Q289 397 268 376Q247 355 244 333ZM602 258Q602 245 601.5 231.5Q601 218 600 209H246Q247 195 255.5 184Q264 173 276.5 165Q289 157 304.5 153Q320 149 336 149Q368 149 389.5 160.5Q411 172 422 186L586 103Q551 46 484.5 13Q418-20 330-20Q273-20 219-2Q165 16 123.5 51.5Q82 87 57 140Q32 193 32 263Q32 328 55 380.5Q78 433 117.5 469.5Q157 506 210.5 526Q264 546 325 546Q387 546 438 524.5Q489 503 525.5 464.5Q562 426 582 373Q602 320 602 258Z"/>
