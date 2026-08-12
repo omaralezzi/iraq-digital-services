@@ -1,7 +1,7 @@
 export const siteSettings = {
   brand: {
-    name: "[PROJECT_NAME]",
-    arabicName: "[اسم المشروع]",
+    name: "sifr.one",
+    arabicName: "sifr.one",
     tagline: {
       ar: "تقنيات حديثة، وتواصل بالعربية، وتنفيذ من ألمانيا.",
       en: "Modern technology, Arabic communication, delivery from Germany.",
@@ -19,7 +19,7 @@ export const siteSettings = {
     supervisoryAuthority: "[VERIFY IF APPLICABLE]",
   },
   contact: {
-    domain: "[DOMAIN_TO_BE_SELECTED_LATER]",
+    domain: "sifr.one",
     email: "[NEW_BUSINESS_EMAIL]",
     phone: "[TO_BE_ADDED]",
     whatsapp: "[TO_BE_ADDED]",

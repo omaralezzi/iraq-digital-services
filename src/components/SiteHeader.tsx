@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { Locale } from "@/src/content/siteSettings";
-import { siteSettings } from "@/src/content/siteSettings";
 import { ui } from "@/src/content/locales";
+import { BrandLogo } from "@/src/components/BrandLogo";
 
 export function SiteHeader({ locale }: { locale: Locale }) {
   const [open, setOpen] = useState(false);
@@ -27,5 +27,5 @@ export function SiteHeader({ locale }: { locale: Locale }) {
     [`/${locale}#faq`, copy.nav.faq],
     [`/${locale}#contact`, copy.nav.contact],
   ];
-  return <header className="site-header"><div className="container nav-wrap"><Link href={`/${locale}`} className="wordmark" aria-label={locale === "ar" ? "الصفحة الرئيسية" : "Home"}><span className="wordmark-mark">ع</span><span><b>{locale === "ar" ? siteSettings.brand.arabicName : siteSettings.brand.name}</b><small>{locale === "ar" ? "حلول رقمية للعراق" : "Digital solutions for Iraq"}</small></span></Link><button className="menu-button" type="button" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="main-nav"><span></span><span></span><span></span><em>{locale === "ar" ? "القائمة" : "Menu"}</em></button><nav id="main-nav" className={open ? "nav-links open" : "nav-links"} aria-label={locale === "ar" ? "قائمة التنقل الرئيسية" : "Main navigation"}>{links.map(([href, label]) => <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>)}</nav><div className="nav-actions"><button className="wa-button" type="button" disabled title={locale === "ar" ? "يُفعَّل بعد إضافة رقم WhatsApp" : "Enabled after adding a WhatsApp number"}>WA</button><button className="lite-toggle" type="button" onClick={toggleLite} aria-pressed={lite}><span aria-hidden="true">◐</span>{lite ? copy.normal : copy.light}</button><Link className="lang-switch" href={`/${other}`} hrefLang={other}>{other.toUpperCase()}</Link><Link className="button small primary" href={`/${locale}#project-wizard`}>{copy.quote}</Link></div></div></header>;
+  return <header className="site-header"><div className="container nav-wrap"><Link href={`/${locale}`} className="wordmark" aria-label={locale === "ar" ? "sifr.one — الصفحة الرئيسية" : "sifr.one — Home"}><BrandLogo priority /></Link><button className="menu-button" type="button" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="main-nav"><span></span><span></span><span></span><em>{locale === "ar" ? "القائمة" : "Menu"}</em></button><nav id="main-nav" className={open ? "nav-links open" : "nav-links"} aria-label={locale === "ar" ? "قائمة التنقل الرئيسية" : "Main navigation"}>{links.map(([href, label]) => <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>)}</nav><div className="nav-actions"><button className="wa-button" type="button" disabled title={locale === "ar" ? "يُفعَّل بعد إضافة رقم WhatsApp" : "Enabled after adding a WhatsApp number"}>WA</button><button className="lite-toggle" type="button" onClick={toggleLite} aria-pressed={lite}><span aria-hidden="true">◐</span>{lite ? copy.normal : copy.light}</button><Link className="lang-switch" href={`/${other}`} hrefLang={other}>{other.toUpperCase()}</Link><Link className="button small primary" href={`/${locale}#project-wizard`}>{copy.quote}</Link></div></div></header>;
 }

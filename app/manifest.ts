@@ -2,13 +2,13 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "حلول رقمية للعراق",
-    short_name: "حلول العراق",
+    name: "sifr.one — حلول رقمية للسوق العراقي",
+    short_name: "sifr.one",
     description: "مواقع وتطبيقات وأنظمة وأتمتة أعمال موجّهة إلى السوق العراقي.",
     start_url: "/ar",
     scope: "/",
     display: "standalone",
-    background_color: "#06111f",
+    background_color: "#000000",
     theme_color: "#081827",
     orientation: "any",
     lang: "ar",

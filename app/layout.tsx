@@ -17,9 +17,12 @@ const latin = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: { default: "حلول رقمية للسوق العراقي", template: "%s | حلول رقمية للعراق" },
+  title: { default: "sifr.one | حلول رقمية للسوق العراقي", template: "%s | sifr.one" },
   description: "مواقع وتطبيقات وأنظمة وأتمتة أعمال موجّهة للعراق، تُدار وتُنفّذ من ألمانيا مع تواصل واضح بالعربية.",
-  applicationName: "حلول رقمية للعراق",
+  applicationName: "sifr.one",
+  category: "technology",
+  creator: "sifr.one",
+  publisher: "sifr.one",
   manifest: "/manifest.webmanifest",
   icons: {
     icon: [
@@ -30,7 +33,7 @@ export const metadata: Metadata = {
     shortcut: [{ url: "/favicon.svg", type: "image/svg+xml" }],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
-  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "حلول العراق" },
+  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "sifr.one" },
 };
 
 export const viewport: Viewport = { themeColor: "#081827", colorScheme: "dark" };

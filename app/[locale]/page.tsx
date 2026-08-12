@@ -20,9 +20,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const protocol = host.includes("localhost") ? "http" : "https";
   const base = `${protocol}://${host}`;
   const ar = locale !== "en";
-  const title = ar ? "تصميم مواقع وتطبيقات وأتمتة أعمال للعراق" : "Websites, apps and business automation for Iraq";
+  const title = ar ? "sifr.one — تصميم مواقع وتطبيقات وأتمتة أعمال للعراق" : "sifr.one — Websites, apps and business automation for Iraq";
   const description = ar ? "نحوّل فكرتك إلى موقع أو تطبيق أو نظام يعمل فعليًا، مع تنفيذ من ألمانيا وتواصل بالعربية." : "Turn your idea into a website, app or system that works—delivered from Germany with Arabic communication.";
-  return { title, description, alternates: { languages: { ar: `${base}/ar`, en: `${base}/en` } }, openGraph: { title, description, type: "website", locale: ar ? "ar_IQ" : "en_US", images: [{ url: `${base}/og.png`, width: 1536, height: 1024, alt: title }] }, twitter: { card: "summary_large_image", title, description, images: [`${base}/og.png`] } };
+  return { title: { absolute: title }, description, alternates: { languages: { ar: `${base}/ar`, en: `${base}/en` } }, openGraph: { siteName: "sifr.one", title, description, type: "website", locale: ar ? "ar_IQ" : "en_US", images: [{ url: `${base}/og.png`, width: 1536, height: 1024, alt: title }] }, twitter: { card: "summary_large_image", title, description, images: [`${base}/og.png`] } };
 }
 
 export default async function LocaleHome({ params }: { params: Promise<{ locale: string }> }) {

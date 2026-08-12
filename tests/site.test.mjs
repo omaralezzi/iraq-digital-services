@@ -5,11 +5,13 @@ import test from "node:test";
 const root = new URL("../", import.meta.url);
 const read = (path) => readFile(new URL(path, root), "utf8");
 
-test("central settings preserve verified provider identity and placeholders", async () => {
+test("central settings preserve verified provider identity and the approved brand", async () => {
   const settings = await read("src/content/siteSettings.ts");
   assert.match(settings, /Omar Al‑Ezzi/);
   assert.match(settings, /Vautierstr\. 57/);
-  assert.match(settings, /\[PROJECT_NAME\]/);
+  assert.match(settings, /name: "sifr\.one"/);
+  assert.match(settings, /domain: "sifr\.one"/);
+  assert.doesNotMatch(settings, /\[PROJECT_NAME\]|\[اسم المشروع\]|\[DOMAIN_TO_BE_SELECTED_LATER\]/);
   assert.match(settings, /\[NEW_BUSINESS_EMAIL\]/);
   assert.match(settings, /\[VERIFY: Einzelunternehmer \/ Freiberufler \/ other\]/);
   assert.doesNotMatch(settings, /ArabVergleich/);
@@ -110,6 +112,22 @@ test("the site can be installed across supported desktop and mobile browsers", a
   assert.match(runtime, /InstallAppPrompt/);
   assert.match(prompt, /beforeinstallprompt/);
   assert.match(prompt, /إضافة إلى الشاشة الرئيسية/);
+  assert.match(prompt, /app-icon-512\.png/);
   assert.match(worker, /addEventListener\("fetch"/);
-  for (const icon of ["app-icon-192.png", "app-icon-512.png", "apple-touch-icon.png"]) await access(new URL(`public/${icon}`, root));
+  for (const icon of ["app-icon-192.png", "app-icon-512.png", "apple-touch-icon.png", "favicon.svg", "brand/sifr-one-logo.svg", "brand/sifr-one-mark.svg"]) await access(new URL(`public/${icon}`, root));
+});
+
+test("the approved sifr.one identity is used across navigation and metadata", async () => {
+  const [header, footer, brand, layout, manifest, home] = await Promise.all([
+    read("src/components/SiteHeader.tsx"),
+    read("src/components/SiteFooter.tsx"),
+    read("src/components/BrandLogo.tsx"),
+    read("app/layout.tsx"),
+    read("app/manifest.ts"),
+    read("app/[locale]/page.tsx"),
+  ]);
+  for (const source of [header, footer, brand, layout, manifest, home]) assert.match(source, /sifr\.one/);
+  assert.match(layout, /favicon\.svg/);
+  assert.match(brand, /brand-logo-zero/);
+  assert.doesNotMatch(`${header}\n${footer}`, /wordmark-mark|\[اسم المشروع\]/);
 });

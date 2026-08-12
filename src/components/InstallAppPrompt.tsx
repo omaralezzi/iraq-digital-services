@@ -1,5 +1,6 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react";
 import type { Locale } from "@/src/content/siteSettings";
 
@@ -92,11 +93,11 @@ export function InstallAppPrompt({ locale }: { locale: Locale }) {
   } satisfies Record<InstallGuide, { title: string; body: string; mark: string }>;
 
   return <>
-    {visible && <aside className={`install-suggestion${installed ? " installed" : ""}`} aria-live="polite" aria-label={ar ? "تثبيت الموقع كتطبيق" : "Install this site as an app"}>
-      <span className="install-app-icon" aria-hidden="true"><b>ع</b><i>+</i></span>
+    {visible && <aside className={`install-suggestion${installed ? " installed" : ""}`} aria-live="polite" aria-label={ar ? "تثبيت sifr.one كتطبيق" : "Install sifr.one as an app"}>
+      <span className="install-app-icon" aria-hidden="true"><img src="/app-icon-512.png" alt="" width="48" height="48" /></span>
       <span className="install-copy">
         <small>{installed ? (ar ? "أصبح جاهزًا" : "Ready to use") : (ar ? "وصول مباشر" : "Direct access")}</small>
-        <strong>{installed ? (ar ? "تم تثبيت الموقع على جهازك" : "The site is installed on your device") : (ar ? "ثبّت الموقع على جهازك" : "Install the site on your device")}</strong>
+        <strong>{installed ? (ar ? "تم تثبيت sifr.one على جهازك" : "sifr.one is installed on your device") : (ar ? "ثبّت sifr.one على جهازك" : "Install sifr.one on your device")}</strong>
         <em>{ar ? "افتحه من الشاشة الرئيسية أو سطح المكتب، مثل أي تطبيق." : "Open it from your home screen or desktop, just like an app."}</em>
       </span>
       {!installed && <button className="install-action" type="button" onClick={requestInstall}><span aria-hidden="true">↓</span>{ar ? "تثبيت" : "Install"}</button>}
