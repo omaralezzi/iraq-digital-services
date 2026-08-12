@@ -8,7 +8,7 @@ type BrandLogoProps = {
 export function BrandLogo({ className = "", priority = false }: BrandLogoProps) {
   return (
     <span className={`brand-logo${className ? ` ${className}` : ""}`}>
-      <Image src="/brand/sifrsifr-one-logo.svg" alt="sifrsifr.one" width={86} height={84} priority={priority} />
+      <Image src="/brand/sifrsifr-one-logo.svg" alt="sifrsifr.one" width={214} height={72} priority={priority} />
     </span>
   );
 }
