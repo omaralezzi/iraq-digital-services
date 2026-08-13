@@ -13,15 +13,15 @@ export function ContextDemo({ locale, slug, kind }: { locale: Locale; slug: stri
   return <section className={`context-demo container tone-${demo.tone}`} aria-labelledby={`${kind}-${slug}-demo-title`}>
     <div className="context-demo-heading">
       <div>
-        <span className="eyebrow">{ar ? "نموذج توضيحي تفاعلي" : "Interactive illustrative demo"}</span>
+        <span className="eyebrow">{ar ? "جرّب واجهة تفاعلية" : "Try an interactive interface"}</span>
         <h2 id={`${kind}-${slug}-demo-title`}>{text(demo.headline)}</h2>
         <p>{text(demo.description)}</p>
       </div>
-      <div className="fictional-badge"><span>i</span>{ar ? "بيانات خيالية — لا يُحفظ أو يُرسل أي شيء" : "Fictional data — nothing is stored or sent"}</div>
+      <div className="fictional-badge"><span>i</span>{ar ? "تجربة آمنة — لا تُدخل بيانات حقيقية" : "Safe preview — do not enter real data"}</div>
     </div>
 
     <DomainPreview demo={demo} locale={locale} slug={slug} />
-    <p className="context-demo-note">{ar ? "يوضح هذا النموذج رحلة مستخدم وواجهة محتملتين. ويُخصّص التصميم والحقول والربط الفعلي بعد فهم نشاطك. هذا ليس مشروعًا تابعًا لعميل حقيقي." : "This demo illustrates a possible journey and interface. Design, fields and integrations are tailored after understanding your operation; it is not a real client project."}</p>
+    <p className="context-demo-note">{ar ? "تساعدك هذه التجربة على تصوّر رحلة المستخدم. يُخصّص التصميم والحقول والتكاملات بعد فهم نشاطك، وجميع الأسماء والبيانات المعروضة أمثلة غير حقيقية." : "This preview helps you picture the user journey. Design, fields and integrations are tailored after understanding your operation, and all displayed names and data are fictional examples."}</p>
     <StaticDesignGallery locale={locale} slug={slug} />
   </section>;
 }

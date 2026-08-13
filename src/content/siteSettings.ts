@@ -13,23 +13,17 @@ export const siteSettings = {
     address: ["Vautierstr. 57", "40237 Düsseldorf", "Germany"],
     serviceLocation: "Germany",
     targetMarket: "Iraq",
-    legalForm: "[VERIFY: Einzelunternehmer / Freiberufler / other]",
-    vatId: "[VERIFY IF AVAILABLE]",
-    register: "[VERIFY IF APPLICABLE]",
-    supervisoryAuthority: "[VERIFY IF APPLICABLE]",
   },
   contact: {
     domain: "sifrsifr.one",
-    email: "[NEW_BUSINESS_EMAIL]",
-    phone: "[TO_BE_ADDED]",
-    whatsapp: "[TO_BE_ADDED]",
+    email: "info@sifrsifr.one",
   },
   locale: {
     default: "ar" as const,
     supported: ["ar", "en"] as const,
     future: ["de"] as const,
   },
-  legalReviewDate: "2026-08-11",
+  legalReviewDate: "2026-08-13",
 } as const;
 
 export type Locale = (typeof siteSettings.locale.supported)[number];

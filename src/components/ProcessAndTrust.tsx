@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import type { Locale } from "@/src/content/siteSettings";
-import { representatives } from "@/src/content/representatives";
 
 const processAr = [
   "إرسال الفكرة",
@@ -36,8 +35,8 @@ const processEn = [
 
 const faqs = {
   ar: [
-    ["هل تُقدَّم الخدمة من العراق أم من ألمانيا؟", "تُدار الخدمة وتُنفّذ من ألمانيا، وتستهدف بصورة أساسية أصحاب الأعمال في العراق."],
-    ["من هو الطرف المتعاقد؟", "الطرف المتعاقد هو عمر العزي (Omar Al‑Ezzi) في ألمانيا، ما لم تُحدَّث البيانات القانونية لاحقًا. ولا يصبح المسوّق طرفًا في العقد لمجرد مشاركته في التواصل."],
+    ["هل تُقدَّم الخدمة من العراق أم من ألمانيا؟", "تُدار الخدمة وتُنفّذ من ألمانيا، وتستهدف الشركات وأصحاب الأعمال والأفراد في العراق."],
+    ["من هو الطرف المتعاقد؟", "الطرف المتعاقد هو عمر العزي (Omar Al‑Ezzi) في ألمانيا. ولا يصبح أي وسيط أو مسوّق طرفًا في العقد إلا بتفويض مكتوب وصريح."],
     ["كيف يتم التواصل والدفع؟", "تُحدَّد وسيلة التواصل وفق القنوات المتاحة. وتُذكر طريقة الدفع والعملة والدفعات المرحلية في عرض السعر والعقد بعد مراجعة المتطلبات."],
     ["كم يستغرق إنشاء الموقع؟", "تعتمد المدة على عدد الصفحات والمحتوى والتكاملات المطلوبة. وتُحدَّد بعد تثبيت النطاق، لذلك لا نقدّم وعدًا زمنيًا آليًا."],
     ["هل يعمل الموقع بالعربية وعلى الهاتف؟", "نعم. تُبنى التجربة بالعربية من اليمين إلى اليسار، وبالإنجليزية من اليسار إلى اليمين، وفق منهج يبدأ من شاشة الهاتف."],
@@ -47,13 +46,12 @@ const faqs = {
     ["هل يمكن تطوير المشروع لاحقًا؟", "نعم. نفضّل بناء أساس قابل للتوسع، ويمكن البدء بنطاق صغير وواضح ثم تطويره."],
     ["هل أملك النطاق والموقع والكود؟", "تُحدَّد تفاصيل الملكية والتسليم والحسابات وتراخيص المكتبات الخارجية بوضوح في عرض السعر والعقد."],
     ["هل يتوفر دعم بعد الإطلاق؟", "يمكن إضافة فترة دعم أو صيانة وفق اتفاق ونطاق مكتوبين."],
-    ["هل يوجد ممثل في محافظتي؟", representatives.length ? "يُتحقق من الممثلين النشطين عند إرسال الطلب." : "لا يوجد ممثل نشط مُعلَن حاليًا، وتتولى المتابعة المركزية معالجة الطلب."],
     ["هل النماذج المعروضة مشاريع حقيقية؟", "لا. جميعها نماذج توضيحية تستخدم بيانات خيالية ولا تمثل عملاء حقيقيين."],
     ["هل التقييم الأولي للسعر نهائي؟", "لا توجد أسعار منشورة حاليًا. ويبقى أي تقييم أولي غير نهائي حتى يُعتمد النطاق ويصدر عرض مكتوب."],
   ],
   en: [
-    ["Is the service in Iraq or Germany?", "Services are managed and delivered from Germany, primarily for business owners in Iraq."],
-    ["Who is the contracting party?", "Omar Al‑Ezzi in Germany unless the legal information is updated later. A marketer does not become the contracting party."],
+    ["Is the service in Iraq or Germany?", "Services are managed and delivered from Germany for companies, business owners and individual customers in Iraq."],
+    ["Who is the contracting party?", "The contracting party is Omar Al‑Ezzi in Germany. An intermediary or marketer is not a contracting party without explicit written authority."],
     ["How do communication and payment work?", "Communication uses the available channel. Payment method, currency and milestones are specified in the quote and contract after review."],
     ["How long does a website take?", "It depends on pages, content and integrations. Timing follows a confirmed scope, never an automated promise."],
     ["Does it work in Arabic and on mobile?", "Yes. The experience supports Arabic RTL and English LTR and is designed mobile-first."],
@@ -63,7 +61,6 @@ const faqs = {
     ["Can the project grow later?", "Yes. We prefer extensible foundations and can start with a focused scope."],
     ["Do I own the domain, site and code?", "Ownership, handover, accounts and third-party licensing are explicitly defined in the quote and contract."],
     ["Do you offer post-launch support?", "A written support or maintenance period can be added by agreement."],
-    ["Is there a representative in my governorate?", representatives.length ? "Active representatives are checked when you enquire." : "No active representative is currently advertised. Central follow-up handles the request."],
     ["Are the demos real projects?", "No. All demos use fictional data and do not represent real clients."],
     ["Is an estimate final?", "No prices are currently published. An initial assessment is not final until scope and a written quote are approved."],
   ],
@@ -92,10 +89,6 @@ export function ProcessAndTrust({ locale }: { locale: Locale }) {
       <div className="container why-layout">
         <div><span className="eyebrow">{ar ? "لماذا هذا الأسلوب؟" : "Why this approach?"}</span><h2>{ar ? "تقنية تناسب العمل، لا استعراضًا تقنيًا." : "Technology that fits the business—not a technical showcase."}</h2><p>{ar ? "هدفنا أن تعرف ما الذي ستحصل عليه، ولماذا تحتاج إليه، وكيف يمكن تطويره مستقبلًا." : "You should know what you will receive, why it matters and how it can grow later."}</p><div className="why-experience"><span>2001—2026</span><p>{ar ? "خبرة تمتد إلى 25 عامًا في البرمجة وتطوير الأنظمة، تساعدنا على اختيار التقنية المناسبة وبناء حل يمكن صيانته وتطويره مستقبلًا." : "Twenty-five years in programming and systems development help us choose the right technology and build a solution that remains maintainable and ready to grow."}</p></div></div>
         <div className="why-list">{why.map((item, i) => <div key={item}><span>{String(i + 1).padStart(2, "0")}</span><b>{item}</b><i>✓</i></div>)}</div>
-      </div>
-      <div className="container rep-cta">
-        <div><span className="eyebrow">{ar ? "التواصل في المحافظات" : "Governorate contact"}</span><h3>{ar ? "اسأل عن أقرب ممثل متاح في العراق." : "Request contact with the nearest available representative in Iraq."}</h3><p>{ar ? "إذا لم يتوفر ممثل في منطقتك، تتولى المتابعة المركزية معالجة طلبك مباشرة. ولا يصبح الممثل طرفًا متعاقدًا تلقائيًا." : "If no representative is available, central follow-up handles your request. A representative is not automatically the contracting party."}</p></div>
-        <a className="button ghost" href="#contact">{ar ? "أرسل طلبًا" : "Send a request"}</a>
       </div>
     </section>
 

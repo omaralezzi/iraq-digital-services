@@ -12,8 +12,8 @@ test("central settings preserve verified provider identity and the approved bran
   assert.match(settings, /name: "sifrsifr\.one"/);
   assert.match(settings, /domain: "sifrsifr\.one"/);
   assert.doesNotMatch(settings, /\[PROJECT_NAME\]|\[اسم المشروع\]|\[DOMAIN_TO_BE_SELECTED_LATER\]/);
-  assert.match(settings, /\[NEW_BUSINESS_EMAIL\]/);
-  assert.match(settings, /\[VERIFY: Einzelunternehmer \/ Freiberufler \/ other\]/);
+  assert.match(settings, /info@sifrsifr\.one/);
+  assert.doesNotMatch(settings, /\[NEW_BUSINESS_EMAIL\]|\[VERIFY|\[TO_BE_ADDED\]/);
   assert.doesNotMatch(settings, /ArabVergleich/);
 });
 
@@ -77,8 +77,8 @@ test("every service and industry detail page includes a contextual interactive d
 });
 
 test("forms include server validation, honeypot, consent and rate limiting", async () => {
-  const [contact, project, security] = await Promise.all([
-    read("app/api/contact/route.ts"), read("app/api/project/route.ts"), read("src/lib/formSecurity.ts"),
+  const [contact, project, security, delivery] = await Promise.all([
+    read("app/api/contact/route.ts"), read("app/api/project/route.ts"), read("src/lib/formSecurity.ts"), read("src/lib/enquiryEmail.ts"),
   ]);
   for (const source of [contact, project]) {
     assert.match(source, /input\.website/);
@@ -88,6 +88,23 @@ test("forms include server validation, honeypot, consent and rate limiting", asy
     assert.match(source, /429/);
   }
   assert.match(security, /replace\(/);
+  assert.match(contact, /sendEnquiryEmail/);
+  assert.match(project, /sendEnquiryEmail/);
+  assert.match(delivery, /process\.env\.ENQUIRY_RECIPIENT_EMAIL/);
+  assert.match(delivery, /process\.env\.RESEND_API_KEY/);
+  assert.doesNotMatch(`${contact}\n${project}\n${delivery}`, /ishtaar\.it@gmail\.com/);
+});
+
+test("public legal and discovery content contains no launch placeholders", async () => {
+  const [legal, footer, contact, wizard, sitemap, robots] = await Promise.all([
+    read("src/content/legalContent.ts"), read("src/components/SiteFooter.tsx"), read("src/components/ContactForm.tsx"),
+    read("src/components/ProjectWizard.tsx"), read("app/sitemap.ts"), read("app/robots.ts"),
+  ]);
+  const publicCopy = `${legal}\n${footer}\n${contact}\n${wizard}`;
+  assert.doesNotMatch(publicCopy, /\[VERIFY|\[TO_BE|\[NEW_BUSINESS|مسودة تحتاج|Draft requiring|النسخة المحلية|local version|not enabled yet/);
+  assert.match(sitemap, /https:\/\/sifrsifr\.one/);
+  assert.match(robots, /https:\/\/sifrsifr\.one\/sitemap\.xml/);
+  assert.doesNotMatch(`${sitemap}\n${robots}`, /example\.invalid/);
 });
 
 test("starter preview markers and dependency are removed", async () => {

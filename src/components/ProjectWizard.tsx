@@ -18,7 +18,7 @@ const initial: Answers = {
   budget: "",
   governorate: "",
   city: "",
-  preferred: "WhatsApp",
+  preferred: "الهاتف",
   name: "",
   contact: "",
   consent: "",
@@ -52,7 +52,7 @@ export function ProjectWizard({ locale }: { locale: Locale }) {
     { key: "timing", label: ar ? "متى ترغب في بدء المشروع؟" : "When would you like to start?", hint: ar ? "لا نحدّد مدة نهائية قبل تثبيت نطاق المشروع" : "No timeline is promised before scope is confirmed", type: "choices", choices: ar ? ["في أقرب وقت", "خلال شهر", "خلال ثلاثة أشهر", "ما زلت أستكشف الفكرة"] : ["As soon as possible", "Within a month", "Within 3 months", "Exploring the idea"] },
     { key: "budget", label: ar ? "الميزانية التقريبية — اختياري" : "Approximate budget — optional", hint: ar ? "تساعدنا في اقتراح نطاق مناسب، ولا ينتج عنها سعر آلي" : "Helps shape the scope; it will not generate an automatic quote", type: "text", optional: true },
     { key: "location", label: ar ? "أين يقع نشاطك؟" : "Where is the business located?", hint: ar ? "اختر المحافظة، ثم اكتب اسم المدينة" : "Governorate and city", type: "location" },
-    { key: "preferred", label: ar ? "ما وسيلة التواصل المفضلة لديك؟" : "How should we contact you?", hint: ar ? "اختر الوسيلة الأنسب لك" : "Choose the most convenient channel", type: "choices", choices: ["WhatsApp", ar ? "الهاتف" : "Phone", ar ? "البريد الإلكتروني" : "Email"] },
+    { key: "preferred", label: ar ? "ما وسيلة التواصل المفضلة لديك؟" : "How should we contact you?", hint: ar ? "اختر الوسيلة الأنسب لك" : "Choose the most convenient channel", type: "choices", choices: [ar ? "الهاتف" : "Phone", ar ? "البريد الإلكتروني" : "Email"] },
     { key: "contact", label: ar ? "بيانات التواصل" : "Contact details", hint: ar ? "لن نستخدمها للتسويق دون موافقة منفصلة" : "Not used for marketing without separate consent", type: "contact" },
     { key: "summary", label: ar ? "راجع وصف مشروعك" : "Review your project brief", hint: ar ? "يمكنك الرجوع لتعديل أي إجابة قبل الإرسال" : "Go back to edit any answer before submitting", type: "summary" },
   ], [ar]);
@@ -120,7 +120,7 @@ export function ProjectWizard({ locale }: { locale: Locale }) {
   };
 
   if (status === "success") return <section id="project-wizard" className="section wizard-section">
-    <div className="container"><div className="success-card"><span>✓</span><h2>{ar ? "استلم النظام المحلي وصف مشروعك بنجاح" : "Your project brief reached the local system successfully"}</h2><p>{ar ? "هذه النسخة غير مرتبطة بالبريد الإلكتروني أو بنظام CRM حتى الآن. وعند تفعيل الموقع، سنحدّد قناة الاستلام وسياسة الاحتفاظ قبل استقبال الطلبات الحقيقية." : "This local version is not yet connected to email or a CRM. The delivery channel and retention policy will be configured before real enquiries are accepted."}</p><button className="button ghost" onClick={() => { setStatus("idle"); setStep(0); setAnswers(initial); }}>{ar ? "إنشاء طلب آخر" : "Start another brief"}</button></div></div>
+    <div className="container"><div className="success-card"><span>✓</span><h2>{ar ? "تم إرسال وصف مشروعك بنجاح" : "Your project brief was sent successfully"}</h2><p>{ar ? "سنراجع التفاصيل ونتواصل معك عبر الوسيلة التي اخترتها. لا يُعد الإرسال قبولًا للمشروع أو عرض سعر نهائيًا." : "We will review the details and contact you through your preferred channel. Submission is not project acceptance or a final quote."}</p><button className="button ghost" onClick={() => { setStatus("idle"); setStep(0); setAnswers(initial); }}>{ar ? "إنشاء طلب آخر" : "Start another brief"}</button></div></div>
   </section>;
 
   return <section id="project-wizard" className="section wizard-section">

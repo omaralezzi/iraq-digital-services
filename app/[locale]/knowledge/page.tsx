@@ -1,9 +1,0 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { isLocale } from "@/src/content/siteSettings";
-import { SiteHeader } from "@/src/components/SiteHeader";
-import { SiteFooter } from "@/src/components/SiteFooter";
-
-const topics = { ar: ["كم يكلّف إنشاء موقع؟", "ما الفرق بين الموقع والتطبيق؟", "ما أتمتة الأعمال؟", "كيف تختار نوع الموقع المناسب؟", "هل يحتاج نشاطك إلى متجر إلكتروني؟", "كيف تحمي نطاقك وموقعك؟", "ما الذي يجب أن تتسلّمه من المبرمج؟", "كيف تكتب متطلبات مشروعك؟"], en: ["How much does a website cost?", "Website or app: what is the difference?", "What is business automation?", "How do you choose the right website?", "Does your business need an online store?", "How do you protect your domain and website?", "What should your developer hand over?", "How do you write a project brief?"] };
-export const metadata: Metadata = { robots: { index: false, follow: true } };
-export default async function KnowledgePage({ params }: { params: Promise<{ locale: string }> }) { const { locale } = await params; if (!isLocale(locale)) notFound(); const ar = locale === "ar"; return <><SiteHeader locale={locale} /><main className="inner-page container"><section className="inner-hero"><span className="eyebrow">{ar ? "مركز المعرفة — قريبًا" : "Knowledge centre — coming soon"}</span><h1>{ar ? "شرح التقنية بلغة أصحاب الأعمال" : "Technology explained in business language"}</h1><p>{ar ? "مساحة مهيأة لمقالات عربية عملية، بلا حشو أو مصطلحات معقّدة." : "A ready structure for practical articles without filler or needless jargon."}</p></section><div className="knowledge-grid">{topics[locale].map((topic, i) => <article key={topic}><span>0{i + 1}</span><h2>{topic}</h2><p>{ar ? "قيد الإعداد والمراجعة قبل النشر." : "Being prepared and reviewed before publication."}</p></article>)}</div></main><SiteFooter locale={locale} /></>; }

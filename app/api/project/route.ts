@@ -1,4 +1,5 @@
 import { clean, clientKey, jsonError, rateLimited, validContact } from "@/src/lib/formSecurity";
+import { sendEnquiryEmail } from "@/src/lib/enquiryEmail";
 
 export async function POST(request: Request) {
   if (rateLimited(clientKey(request, "project"))) return jsonError("Too many requests", 429);
@@ -8,7 +9,7 @@ export async function POST(request: Request) {
   const required = ["business", "build", "problem", "audience", "features", "integrations", "assets", "timing", "governorate", "city", "preferred", "name", "contact"];
   const cleaned = Object.fromEntries([...required, "budget", "referralCode", "source"].map(key => [key, clean(input[key], key === "problem" || key === "features" ? 2000 : 300)]));
   if (required.some(key => !cleaned[key]) || clean(input.consent, 10) !== "yes" || !validContact(cleaned.contact)) return jsonError("Required fields are invalid", 422);
-  const record = { id: crypto.randomUUID(), receivedAt: new Date().toISOString(), ...cleaned };
-  void record;
-  return Response.json({ ok: true, requestId: record.id }, { status: 201, headers: { "cache-control": "no-store" } });
+  const id = crypto.randomUUID();
+  try { await sendEnquiryEmail("project", id, cleaned); } catch { return jsonError("Delivery is temporarily unavailable", 503); }
+  return Response.json({ ok: true, requestId: id }, { status: 201, headers: { "cache-control": "no-store" } });
 }
