@@ -95,9 +95,9 @@ test("forms include server validation, honeypot, consent and rate limiting", asy
   assert.match(security, /replace\(/);
   assert.match(contact, /sendEnquiryEmail/);
   assert.match(project, /sendEnquiryEmail/);
-  assert.match(delivery, /siteSettings\.contact\.email/);
   assert.match(delivery, /process\.env\.RESEND_API_KEY/);
-  assert.doesNotMatch(delivery, /process\.env\.ENQUIRY_RECIPIENT_EMAIL/);
+  assert.match(delivery, /process\.env\.ENQUIRY_RECIPIENT_EMAIL/);
+  assert.match(delivery, /onboarding@resend\.dev/);
   assert.doesNotMatch(`${contact}\n${project}\n${delivery}`, /ishtaar\.it@gmail\.com/);
 });
 

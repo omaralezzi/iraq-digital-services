@@ -1,8 +1,8 @@
 import "server-only";
-import { siteSettings } from "@/src/content/siteSettings";
 
-const recipient = siteSettings.contact.email;
+const recipient = process.env.ENQUIRY_RECIPIENT_EMAIL;
 const apiKey = process.env.RESEND_API_KEY;
+const sender = process.env.ENQUIRY_FROM_EMAIL || "sifrsifr.one <onboarding@resend.dev>";
 
 type EnquiryKind = "contact" | "project";
 
@@ -21,14 +21,14 @@ const escapeHtml = (value: string) => value
   .replaceAll('"', "&quot;").replaceAll("'", "&#039;");
 
 export async function sendEnquiryEmail(kind: EnquiryKind, id: string, record: Record<string, string>) {
-  if (!apiKey) throw new Error("Email delivery is not configured");
+  if (!apiKey || !recipient) throw new Error("Email delivery is not configured");
   const title = kind === "contact" ? "طلب تواصل جديد" : "وصف مشروع جديد";
   const fields = Object.entries(record).filter(([, value]) => value);
   const html = `<main dir="rtl" style="font-family:Arial,sans-serif;max-width:680px;margin:auto;color:#102438"><h1 style="font-size:24px">${title}</h1><p style="color:#5a6d7d">رقم الطلب: ${escapeHtml(id)}</p><table style="border-collapse:collapse;width:100%">${fields.map(([key, value]) => `<tr><th style="text-align:right;vertical-align:top;border-bottom:1px solid #e4e9ed;padding:10px;width:32%">${escapeHtml(labels[key] ?? key)}</th><td style="white-space:pre-wrap;border-bottom:1px solid #e4e9ed;padding:10px">${escapeHtml(value)}</td></tr>`).join("")}</table></main>`;
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { authorization: `Bearer ${apiKey}`, "content-type": "application/json" },
-    body: JSON.stringify({ from: "sifrsifr.one <forms@sifrsifr.one>", to: [recipient], reply_to: record.email || undefined, subject: `${title} — ${record.name || record.business || id}`, html }),
+    body: JSON.stringify({ from: sender, to: [recipient], reply_to: record.email || undefined, subject: `${title} — ${record.name || record.business || id}`, html }),
   });
   if (!response.ok) throw new Error(`Email provider returned ${response.status}`);
 }
