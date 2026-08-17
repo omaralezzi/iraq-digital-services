@@ -95,9 +95,21 @@ test("forms include server validation, honeypot, consent and rate limiting", asy
   assert.match(security, /replace\(/);
   assert.match(contact, /sendEnquiryEmail/);
   assert.match(project, /sendEnquiryEmail/);
-  assert.match(delivery, /process\.env\.ENQUIRY_RECIPIENT_EMAIL/);
+  assert.match(delivery, /siteSettings\.contact\.email/);
   assert.match(delivery, /process\.env\.RESEND_API_KEY/);
+  assert.doesNotMatch(delivery, /process\.env\.ENQUIRY_RECIPIENT_EMAIL/);
   assert.doesNotMatch(`${contact}\n${project}\n${delivery}`, /ishtaar\.it@gmail\.com/);
+});
+
+test("WhatsApp contact is available in the header and as a persistent floating action", async () => {
+  const [header, runtime, icon, settings] = await Promise.all([
+    read("src/components/SiteHeader.tsx"), read("src/components/LocaleRuntime.tsx"),
+    read("src/components/WhatsAppIcon.tsx"), read("src/content/siteSettings.ts"),
+  ]);
+  assert.match(header, /wa-button/);
+  assert.match(runtime, /whatsapp-float/);
+  assert.match(icon, /viewBox="0 0 24 24"/);
+  assert.match(settings, /https:\/\/wa\.me\/9647762093683/);
 });
 
 test("public legal and discovery content contains no launch placeholders", async () => {

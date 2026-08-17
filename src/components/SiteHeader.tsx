@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import type { Locale } from "@/src/content/siteSettings";
 import { ui } from "@/src/content/locales";
 import { BrandLogo } from "@/src/components/BrandLogo";
+import { WhatsAppIcon } from "@/src/components/WhatsAppIcon";
+import { siteSettings } from "@/src/content/siteSettings";
 
 export function SiteHeader({ locale }: { locale: Locale }) {
   const [open, setOpen] = useState(false);
@@ -34,5 +36,5 @@ export function SiteHeader({ locale }: { locale: Locale }) {
     [`/${locale}#faq`, copy.nav.faq],
     [`/${locale}#contact`, copy.nav.contact],
   ];
-  return <header className="site-header"><div className="container nav-wrap"><Link href={`/${locale}`} scroll className="wordmark" onClick={goHome} aria-label={locale === "ar" ? "sifrsifr.one — الصفحة الرئيسية" : "sifrsifr.one — Home"}><BrandLogo priority /></Link><button className="menu-button" type="button" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="main-nav"><span></span><span></span><span></span><em>{locale === "ar" ? "القائمة" : "Menu"}</em></button><nav id="main-nav" className={open ? "nav-links open" : "nav-links"} aria-label={locale === "ar" ? "قائمة التنقل الرئيسية" : "Main navigation"}>{links.map(([href, label]) => <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>)}</nav><div className="nav-actions"><button className="lite-toggle" type="button" onClick={toggleLite} aria-pressed={lite}><span aria-hidden="true">◐</span>{lite ? copy.normal : copy.light}</button><Link className="lang-switch" href={`/${other}`} hrefLang={other}>{other.toUpperCase()}</Link><Link className="button small primary" href={`/${locale}#project-wizard`}>{copy.quote}</Link></div></div></header>;
+  return <header className="site-header"><div className="container nav-wrap"><Link href={`/${locale}`} scroll className="wordmark" onClick={goHome} aria-label={locale === "ar" ? "sifrsifr.one — الصفحة الرئيسية" : "sifrsifr.one — Home"}><BrandLogo priority /></Link><button className="menu-button" type="button" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="main-nav"><span></span><span></span><span></span><em>{locale === "ar" ? "القائمة" : "Menu"}</em></button><nav id="main-nav" className={open ? "nav-links open" : "nav-links"} aria-label={locale === "ar" ? "قائمة التنقل الرئيسية" : "Main navigation"}>{links.map(([href, label]) => <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>)}</nav><div className="nav-actions"><a className="wa-button" href={siteSettings.contact.whatsappHref} target="_blank" rel="noreferrer" aria-label={locale === "ar" ? "تواصل معنا عبر WhatsApp" : "Contact us on WhatsApp"}><WhatsAppIcon />WhatsApp</a><button className="lite-toggle" type="button" onClick={toggleLite} aria-pressed={lite}><span aria-hidden="true">◐</span>{lite ? copy.normal : copy.light}</button><Link className="lang-switch" href={`/${other}`} hrefLang={other}>{other.toUpperCase()}</Link><Link className="button small primary" href={`/${locale}#project-wizard`}>{copy.quote}</Link></div></div></header>;
 }

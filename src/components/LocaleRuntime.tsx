@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { Locale } from "@/src/content/siteSettings";
+import { siteSettings } from "@/src/content/siteSettings";
 import { InstallAppPrompt } from "@/src/components/InstallAppPrompt";
+import { WhatsAppIcon } from "@/src/components/WhatsAppIcon";
 
 export function LocaleRuntime({ locale, children }: { locale: Locale; children: React.ReactNode }) {
   const [suggestion, setSuggestion] = useState<Locale | null>(null);
@@ -24,5 +26,5 @@ export function LocaleRuntime({ locale, children }: { locale: Locale; children: 
     if (browserLocale !== locale && !sessionStorage.getItem("localeSuggestionDismissed")) queueMicrotask(() => setSuggestion(browserLocale));
   }, [locale]);
   const earlyLocaleScript = `document.documentElement.lang=${JSON.stringify(locale)};document.documentElement.dir=${JSON.stringify(locale === "ar" ? "rtl" : "ltr")};`;
-  return <div className="site-shell" data-locale={locale}><script dangerouslySetInnerHTML={{ __html: earlyLocaleScript }} /><InstallAppPrompt locale={locale} />{children}{suggestion && <aside className="locale-suggestion" role="status"><span>{locale === "ar" ? "يبدو أن لغة متصفحك هي الإنجليزية." : "It looks like your browser language is Arabic."}</span><Link href={`/${suggestion}`}>{suggestion === "ar" ? "العربية" : "English"}</Link><button type="button" aria-label={locale === "ar" ? "إغلاق الاقتراح" : "Dismiss suggestion"} onClick={() => { sessionStorage.setItem("localeSuggestionDismissed", "true"); setSuggestion(null); }}>×</button></aside>}</div>;
+  return <div className="site-shell" data-locale={locale}><script dangerouslySetInnerHTML={{ __html: earlyLocaleScript }} /><InstallAppPrompt locale={locale} />{children}<a className="whatsapp-float" href={siteSettings.contact.whatsappHref} target="_blank" rel="noreferrer" aria-label={locale === "ar" ? "تواصل معنا عبر WhatsApp" : "Contact us on WhatsApp"}><WhatsAppIcon /><span>{locale === "ar" ? "تواصل معنا" : "Contact us"}</span></a>{suggestion && <aside className="locale-suggestion" role="status"><span>{locale === "ar" ? "يبدو أن لغة متصفحك هي الإنجليزية." : "It looks like your browser language is Arabic."}</span><Link href={`/${suggestion}`}>{suggestion === "ar" ? "العربية" : "English"}</Link><button type="button" aria-label={locale === "ar" ? "إغلاق الاقتراح" : "Dismiss suggestion"} onClick={() => { sessionStorage.setItem("localeSuggestionDismissed", "true"); setSuggestion(null); }}>×</button></aside>}</div>;
 }
