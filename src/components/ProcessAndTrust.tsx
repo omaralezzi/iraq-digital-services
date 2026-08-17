@@ -35,8 +35,8 @@ const processEn = [
 
 const faqs = {
   ar: [
-    ["هل تُقدَّم الخدمة من العراق أم من ألمانيا؟", "تُدار الخدمة وتُنفّذ من ألمانيا، وتستهدف الشركات وأصحاب الأعمال والأفراد في العراق."],
-    ["من هو الطرف المتعاقد؟", "الطرف المتعاقد هو عمر العزي (Omar Al‑Ezzi) في ألمانيا. ولا يصبح أي وسيط أو مسوّق طرفًا في العقد إلا بتفويض مكتوب وصريح."],
+    ["هل تُقدَّم الخدمة من العراق أم من ألمانيا؟", "تُدار الخدمة وتُنفّذ من ألمانيا، وتستهدف حصريًا الشركات وأصحاب الأعمال والمستقلين والمهنيين في العراق."],
+    ["من هو الطرف المتعاقد؟", "الطرف المتعاقد هو عمر العزي (Omar Al-Ezzi)، ويعمل بصفته الشخصية كمستقل في ألمانيا. ولا يصبح أي وسيط أو مسوّق طرفًا في العقد إلا بتفويض مكتوب وصريح."],
     ["كيف يتم التواصل والدفع؟", "تُحدَّد وسيلة التواصل وفق القنوات المتاحة. وتُذكر طريقة الدفع والعملة والدفعات المرحلية في عرض السعر والعقد بعد مراجعة المتطلبات."],
     ["كم يستغرق إنشاء الموقع؟", "تعتمد المدة على عدد الصفحات والمحتوى والتكاملات المطلوبة. وتُحدَّد بعد تثبيت النطاق، لذلك لا نقدّم وعدًا زمنيًا آليًا."],
     ["هل يعمل الموقع بالعربية وعلى الهاتف؟", "نعم. تُبنى التجربة بالعربية من اليمين إلى اليسار، وبالإنجليزية من اليسار إلى اليمين، وفق منهج يبدأ من شاشة الهاتف."],
@@ -50,8 +50,8 @@ const faqs = {
     ["هل التقييم الأولي للسعر نهائي؟", "لا توجد أسعار منشورة حاليًا. ويبقى أي تقييم أولي غير نهائي حتى يُعتمد النطاق ويصدر عرض مكتوب."],
   ],
   en: [
-    ["Is the service in Iraq or Germany?", "Services are managed and delivered from Germany for companies, business owners and individual customers in Iraq."],
-    ["Who is the contracting party?", "The contracting party is Omar Al‑Ezzi in Germany. An intermediary or marketer is not a contracting party without explicit written authority."],
+    ["Is the service in Iraq or Germany?", "Services are managed and delivered from Germany exclusively for companies, entrepreneurs, freelancers and professionals in Iraq."],
+    ["Who is the contracting party?", "The contracting party is Omar Al-Ezzi, acting personally as an independent freelancer in Germany. An intermediary or marketer is not a contracting party without explicit written authority."],
     ["How do communication and payment work?", "Communication uses the available channel. Payment method, currency and milestones are specified in the quote and contract after review."],
     ["How long does a website take?", "It depends on pages, content and integrations. Timing follows a confirmed scope, never an automated promise."],
     ["Does it work in Arabic and on mobile?", "Yes. The experience supports Arabic RTL and English LTR and is designed mobile-first."],

@@ -5,27 +5,32 @@ import test from "node:test";
 const root = new URL("../", import.meta.url);
 const read = (path) => readFile(new URL(path, root), "utf8");
 
-test("central settings preserve verified provider identity and the approved brand", async () => {
+test("central settings preserve final provider, contact, language and brand data", async () => {
   const settings = await read("src/content/siteSettings.ts");
-  assert.match(settings, /Omar Al‑Ezzi/);
+  assert.match(settings, /Omar Al-Ezzi/);
   assert.match(settings, /Vautierstr\. 57/);
   assert.match(settings, /name: "sifrsifr\.one"/);
   assert.match(settings, /domain: "sifrsifr\.one"/);
-  assert.doesNotMatch(settings, /\[PROJECT_NAME\]|\[اسم المشروع\]|\[DOMAIN_TO_BE_SELECTED_LATER\]/);
   assert.match(settings, /info@sifrsifr\.one/);
-  assert.doesNotMatch(settings, /\[NEW_BUSINESS_EMAIL\]|\[VERIFY|\[TO_BE_ADDED\]/);
+  assert.match(settings, /\+964 776 209 3683/);
+  assert.match(settings, /Freiberuflich tätig/);
+  assert.match(settings, /supported: \["ar", "en"\]/);
+  assert.doesNotMatch(settings, /future:|"de"|\[PROJECT_NAME\]|\[اسم المشروع\]|\[DOMAIN_TO_BE_SELECTED_LATER\]|\[NEW_BUSINESS_EMAIL\]|\[VERIFY|\[TO_BE_ADDED\]/);
   assert.doesNotMatch(settings, /ArabVergleich/);
 });
 
-test("Arabic, English, services, industries and legal routes are data-driven", async () => {
+test("Arabic, English, services, industries and B2B legal routes are data-driven", async () => {
   const [services, industries, legal, localeLayout] = await Promise.all([
     read("src/content/services.ts"), read("src/content/industries.ts"),
     read("src/content/legalContent.ts"), read("app/[locale]/layout.tsx"),
   ]);
   assert.match(services, /automation/);
   assert.match(industries, /clinics/);
-  assert.match(legal, /§ 5 DDG/);
-  assert.match(legal, /§ 25 TDDDG/);
+  assert.match(legal, /B2B-only scope/);
+  assert.match(legal, /ستة أشهر/);
+  assert.match(legal, /Vercel/);
+  assert.match(legal, /Resend/);
+  assert.doesNotMatch(legal, /slug: "withdrawal"|14-day withdrawal|14 يومًا/);
   assert.match(localeLayout, /LocaleRuntime/);
 });
 
@@ -96,12 +101,18 @@ test("forms include server validation, honeypot, consent and rate limiting", asy
 });
 
 test("public legal and discovery content contains no launch placeholders", async () => {
-  const [legal, footer, contact, wizard, sitemap, robots] = await Promise.all([
-    read("src/content/legalContent.ts"), read("src/components/SiteFooter.tsx"), read("src/components/ContactForm.tsx"),
-    read("src/components/ProjectWizard.tsx"), read("app/sitemap.ts"), read("app/robots.ts"),
+  const [legal, legalPage, settings, footer, contact, wizard, sitemap, robots] = await Promise.all([
+    read("src/content/legalContent.ts"), read("app/[locale]/legal/[slug]/page.tsx"),
+    read("src/content/siteSettings.ts"), read("src/components/SiteFooter.tsx"),
+    read("src/components/ContactForm.tsx"), read("src/components/ProjectWizard.tsx"),
+    read("app/sitemap.ts"), read("app/robots.ts"),
   ]);
-  const publicCopy = `${legal}\n${footer}\n${contact}\n${wizard}`;
-  assert.doesNotMatch(publicCopy, /\[VERIFY|\[TO_BE|\[NEW_BUSINESS|مسودة تحتاج|Draft requiring|النسخة المحلية|local version|not enabled yet/);
+  const publicCopy = `${legal}\n${legalPage}\n${settings}\n${footer}\n${contact}\n${wizard}`;
+  assert.doesNotMatch(publicCopy, /\[VERIFY|\[TO_BE|\[NEW_BUSINESS|\[DEFINE RETENTION PERIODS\]|مسودة تحتاج|Draft requiring|النسخة المحلية|local version|not enabled yet|Steuernummer|USt-IdNr\.|Wirtschafts-Identifikationsnummer|Handelsregister number/);
+  assert.match(publicCopy, /info@sifrsifr\.one/);
+  assert.match(publicCopy, /\+964 776 209 3683/);
+  assert.match(publicCopy, /Freiberuflich tätig/);
+  assert.doesNotMatch(publicCopy, /slug: "withdrawal"|Consumer withdrawal right|حق التراجع للمستهلك/);
   assert.match(sitemap, /https:\/\/sifrsifr\.one/);
   assert.match(robots, /https:\/\/sifrsifr\.one\/sitemap\.xml/);
   assert.doesNotMatch(`${sitemap}\n${robots}`, /example\.invalid/);

@@ -128,7 +128,7 @@ export function ProjectWizard({ locale }: { locale: Locale }) {
       <div className="wizard-intro">
         <span className="eyebrow">{ar ? "معالج طلب المشروع" : "Project brief wizard"}</span>
         <h2>{ar ? "لا تعرف اسم الحل؟ صِف المشكلة خطوة بخطوة." : "Not sure what to call the solution? Describe the problem step by step."}</h2>
-        <p>{ar ? "لن ينتج المعالج سعرًا نهائيًا آليًا أو وعدًا ملزمًا. سنستخدم إجاباتك لفهم الفكرة وتحديد ما يحتاج إلى تقييم." : "This will not generate a final quote or binding promise. Your answers help us understand what needs assessment."}</p>
+        <p>{ar ? "لن ينتج المعالج سعرًا نهائيًا آليًا أو وعدًا ملزمًا. سنستخدم إجاباتك لفهم الفكرة وتحديد ما يحتاج إلى تقييم. هذا المسار مخصص لطلبات الأعمال والأغراض المهنية فقط." : "This will not generate a final quote or binding promise. Your answers help us understand what needs assessment. This process is for business and professional enquiries only."}</p>
       </div>
 
       <form className="wizard-card" onSubmit={submit}>

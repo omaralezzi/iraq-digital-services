@@ -11,7 +11,7 @@ export function Hero({ locale }: { locale: Locale }) {
       <div className="hero-copy">
         <div className="eyebrow"><span></span>{ar ? "من ألمانيا إلى السوق العراقي" : "From Germany to the Iraqi market"}</div>
         <h1>{ar ? <>نحوّل فكرتك إلى <em>نظام رقمي</em> يعمل فعليًا.</> : <>Turn your idea into a <em>digital system</em> that actually works.</>}</h1>
-        <p>{ar ? "خدمات رقمية للشركات وأصحاب الأعمال والأفراد في العراق، تُدار وتُنفّذ من ألمانيا، مع تواصل عربي وخطة واضحة من الفكرة حتى الإطلاق." : "Digital services for companies, business owners and individual customers in Iraq, managed and delivered from Germany with Arabic communication and a clear plan from idea to launch."}</p>
+        <p>{ar ? "خدمات رقمية للشركات وأصحاب الأعمال والمستقلين والمهنيين في العراق، تُدار وتُنفّذ من ألمانيا، مع تواصل عربي وخطة واضحة من الفكرة حتى الإطلاق." : "Digital services for companies, entrepreneurs, freelancers and professionals in Iraq, managed and delivered from Germany with Arabic communication and a clear plan from idea to launch."}</p>
         <div className="hero-actions">
           <Link className="button primary" href={`/${locale}#project-wizard`}>{ar ? "ابدأ وصف مشروعك" : "Describe your project"}<span>↗</span></Link>
           <Link className="button ghost" href={`/${locale}#contact`}>{ar ? "استشارة أولية" : "Initial consultation"}</Link>

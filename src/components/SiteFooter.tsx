@@ -6,4 +6,25 @@ import { legalDocuments } from "@/src/content/legalContent";
 import { siteSettings } from "@/src/content/siteSettings";
 import { BrandLogo } from "@/src/components/BrandLogo";
 
-export function SiteFooter({ locale }: { locale: Locale }) { const ar = locale === "ar"; return <footer className="site-footer"><div className="container"><div className="footer-top"><div className="footer-brand"><div className="wordmark" aria-label="sifrsifr.one"><BrandLogo /></div><p>{ar ? siteSettings.brand.tagline.ar : siteSettings.brand.tagline.en}</p><p className="legal-identity">{ar ? "مزوّد الخدمة والطرف المتعاقد: عمر العزي (Omar Al‑Ezzi)، دوسلدورف، ألمانيا." : "Service provider and contracting party: Omar Al‑Ezzi, Düsseldorf, Germany."}</p><a href={`mailto:${siteSettings.contact.email}`}>{siteSettings.contact.email}</a></div><div><h3>{ar ? "الخدمات" : "Services"}</h3>{services.slice(0, 5).map(x => <Link key={x.slug} href={`/${locale}/services/${x.slug}`}>{x.title[locale]}</Link>)}</div><div><h3>{ar ? "القطاعات" : "Industries"}</h3>{industries.slice(0, 5).map(x => <Link key={x.slug} href={`/${locale}/industries/${x.slug}`}>{x.title[locale]}</Link>)}</div><div><h3>{ar ? "معلومات" : "Information"}</h3>{legalDocuments.slice(0, 5).map(x => <Link key={x.slug} href={`/${locale}/legal/${x.slug}`}>{x.title[locale]}</Link>)}</div></div><div className="footer-legal"><div className="legal-links">{legalDocuments.slice(5).map(x => <Link key={x.slug} href={`/${locale}/legal/${x.slug}`}>{x.title[locale]}</Link>)}</div></div><div className="footer-bottom"><span>© 2026 sifrsifr.one · {siteSettings.provider.legalName}</span><span>{ar ? "مصمّم للسوق العراقي · يُنفَّذ من ألمانيا" : "Designed for Iraq · Delivered from Germany"}</span></div></div></footer>; }
+export function SiteFooter({ locale }: { locale: Locale }) {
+  const ar = locale === "ar";
+  return <footer className="site-footer"><div className="container">
+    <div className="footer-top">
+      <div className="footer-brand">
+        <div className="wordmark" aria-label="sifrsifr.one"><BrandLogo /></div>
+        <p>{ar ? siteSettings.brand.tagline.ar : siteSettings.brand.tagline.en}</p>
+        <p className="legal-identity">{ar ? `مزوّد الخدمة والطرف المتعاقد: عمر العزي (Omar Al-Ezzi)، ${siteSettings.provider.professionalStatus}، دوسلدورف، ألمانيا.` : `Service provider and contracting party: ${siteSettings.provider.legalName}, ${siteSettings.provider.professionalStatus}, Düsseldorf, Germany.`}</p>
+        <div className="footer-contact-links">
+          <a href={`mailto:${siteSettings.contact.email}`}>{siteSettings.contact.email}</a>
+          <a href={`tel:${siteSettings.contact.phoneHref}`} dir="ltr">{siteSettings.contact.phone}</a>
+          <a href={siteSettings.contact.whatsappHref} target="_blank" rel="noreferrer" dir="ltr">WhatsApp · {siteSettings.contact.whatsapp}</a>
+        </div>
+      </div>
+      <div><h3>{ar ? "الخدمات" : "Services"}</h3>{services.slice(0, 5).map(x => <Link key={x.slug} href={`/${locale}/services/${x.slug}`}>{x.title[locale]}</Link>)}</div>
+      <div><h3>{ar ? "القطاعات" : "Industries"}</h3>{industries.slice(0, 5).map(x => <Link key={x.slug} href={`/${locale}/industries/${x.slug}`}>{x.title[locale]}</Link>)}</div>
+      <div><h3>{ar ? "معلومات" : "Information"}</h3>{legalDocuments.slice(0, 5).map(x => <Link key={x.slug} href={`/${locale}/legal/${x.slug}`}>{x.title[locale]}</Link>)}</div>
+    </div>
+    <div className="footer-legal"><div className="legal-links">{legalDocuments.slice(5).map(x => <Link key={x.slug} href={`/${locale}/legal/${x.slug}`}>{x.title[locale]}</Link>)}</div></div>
+    <div className="footer-bottom"><span>© 2026 sifrsifr.one · {siteSettings.provider.legalName}</span><span>{ar ? "مصمّم للسوق العراقي · يُنفَّذ من ألمانيا" : "Designed for Iraq · Delivered from Germany"}</span></div>
+  </div></footer>;
+}

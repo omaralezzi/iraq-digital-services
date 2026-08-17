@@ -37,7 +37,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
       <div className="contact-copy">
         <span className="eyebrow">{ar ? "تواصل واضح منذ البداية" : "Clear communication from day one"}</span>
         <h2>{ar ? "أخبرنا بالمشكلة، وسنبدأ من هناك." : "Tell us the problem. We will start there."}</h2>
-        <p>{ar ? "أرسل وصفًا مختصرًا لاحتياجك، وسنراجعه قبل تحديد النطاق أو التكلفة أو المدة." : "Send a short description of what you need. We will review it before defining scope, cost or timing."}</p>
+        <p>{ar ? "أرسل وصفًا مختصرًا لاحتياجك المهني أو التجاري، وسنراجعه قبل تحديد النطاق أو التكلفة أو المدة. تُقدَّم الخدمات لعملاء الأعمال والمهنيين فقط." : "Send a short description of your commercial or professional need. We will review it before defining scope, cost or timing. Services are offered to business and professional customers only."}</p>
         <div className="contact-facts">
           <div><span>01</span><p><b>{ar ? "التنفيذ" : "Delivery"}</b>{ar ? "من دوسلدورف، ألمانيا" : "From Düsseldorf, Germany"}</p></div>
           <div><span>02</span><p><b>{ar ? "السوق المستهدف" : "Market"}</b>{ar ? "العراق" : "Iraq"}</p></div>
@@ -62,7 +62,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
           <label>{ar ? "نوع المشروع" : "Project type"}<select name="projectType"><option>{ar ? "موقع إلكتروني" : "Website"}</option><option>{ar ? "متجر إلكتروني" : "Store"}</option><option>{ar ? "تطبيق" : "App"}</option><option>{ar ? "نظام إدارة" : "Management system"}</option><option>{ar ? "أتمتة أعمال" : "Automation"}</option><option>{ar ? "غير متأكد" : "Not sure"}</option></select></label>
           <label>{ar ? "الميزانية — اختياري" : "Budget — optional"}<input name="budget" /></label>
           <label>{ar ? "موعد البدء — اختياري" : "Start date — optional"}<input name="timing" /></label>
-          <label>{ar ? "وسيلة التواصل المفضلة" : "Contact preference"}<select name="preferred"><option>{ar ? "الهاتف" : "Phone"}</option><option>{ar ? "البريد الإلكتروني" : "Email"}</option></select></label>
+          <label>{ar ? "وسيلة التواصل المفضلة" : "Contact preference"}<select name="preferred"><option>{ar ? "الهاتف" : "Phone"}</option><option>WhatsApp</option><option>{ar ? "البريد الإلكتروني" : "Email"}</option></select></label>
           <label>{ar ? "كيف تعرفت علينا؟" : "How did you find us?"}<input name="discovery" /></label>
         </div>
         <label>{ar ? "وصف المشروع *" : "Project description *"}<textarea name="message" required minLength={15} rows={5}></textarea></label>
