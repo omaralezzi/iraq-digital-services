@@ -33,9 +33,15 @@ const processEn = [
   "Optional support",
 ];
 
+const processDe = [
+  "Idee senden", "Erstkontakt", "Anforderungen klären", "Leistungsumfang festlegen",
+  "Preis und Zeitplan", "Erster Entwurf", "Entwicklung", "Tests", "Kundenprüfung",
+  "Veröffentlichung", "Übergabe oder Schulung", "Support nach Vereinbarung",
+];
+
 const faqs = {
   ar: [
-    ["هل تُقدَّم الخدمة من العراق أم من ألمانيا؟", "تُدار الخدمة وتُنفّذ من ألمانيا، وتستهدف حصريًا الشركات وأصحاب الأعمال والمستقلين والمهنيين في العراق."],
+    ["هل تُقدَّم الخدمة من العراق أم من ألمانيا؟", "تُدار الخدمة وتُنفّذ من ألمانيا، وتستهدف الشركات وأصحاب الأعمال والمستقلين والمهنيين في العراق وألمانيا."],
     ["من هو الطرف المتعاقد؟", "الطرف المتعاقد هو عمر العزي (Omar Al-Ezzi)، ويعمل بصفته الشخصية كمستقل في ألمانيا. ولا يصبح أي وسيط أو مسوّق طرفًا في العقد إلا بتفويض مكتوب وصريح."],
     ["كيف يتم التواصل والدفع؟", "تُحدَّد وسيلة التواصل وفق القنوات المتاحة. وتُذكر طريقة الدفع والعملة والدفعات المرحلية في عرض السعر والعقد بعد مراجعة المتطلبات."],
     ["كم يستغرق إنشاء الموقع؟", "تعتمد المدة على عدد الصفحات والمحتوى والتكاملات المطلوبة. وتُحدَّد بعد تثبيت النطاق، لذلك لا نقدّم وعدًا زمنيًا آليًا."],
@@ -50,7 +56,7 @@ const faqs = {
     ["هل التقييم الأولي للسعر نهائي؟", "لا توجد أسعار منشورة حاليًا. ويبقى أي تقييم أولي غير نهائي حتى يُعتمد النطاق ويصدر عرض مكتوب."],
   ],
   en: [
-    ["Is the service in Iraq or Germany?", "Services are managed and delivered from Germany exclusively for companies, entrepreneurs, freelancers and professionals in Iraq."],
+    ["Is the service in Iraq or Germany?", "Services are managed and delivered from Germany for companies, entrepreneurs, freelancers and professionals in Iraq and Germany."],
     ["Who is the contracting party?", "The contracting party is Omar Al-Ezzi, acting personally as an independent freelancer in Germany. An intermediary or marketer is not a contracting party without explicit written authority."],
     ["How do communication and payment work?", "Communication uses the available channel. Payment method, currency and milestones are specified in the quote and contract after review."],
     ["How long does a website take?", "It depends on pages, content and integrations. Timing follows a confirmed scope, never an automated promise."],
@@ -64,22 +70,35 @@ const faqs = {
     ["Are the demos real projects?", "No. All demos use fictional data and do not represent real clients."],
     ["Is an estimate final?", "No prices are currently published. An initial assessment is not final until scope and a written quote are approved."],
   ],
+  de: [
+    ["Wird die Leistung im Irak oder in Deutschland erbracht?", "Die Leistungen werden von Deutschland aus organisiert und umgesetzt. Sie richten sich an Unternehmen, Selbstständige und Berufstätige im Irak und in Deutschland."],
+    ["Wer ist der Vertragspartner?", "Vertragspartner ist Omar Al-Ezzi, der in Deutschland persönlich als Freiberufler tätig ist. Vermittler oder Vertriebspartner werden nur mit ausdrücklicher schriftlicher Vollmacht Vertragspartei."],
+    ["Wie funktionieren Kommunikation und Zahlung?", "Die Kommunikation erfolgt über den vereinbarten Kanal. Zahlungsart, Währung und Meilensteine werden nach Prüfung der Anforderungen im Angebot und Vertrag festgelegt."],
+    ["Wie lange dauert die Erstellung einer Website?", "Das hängt von Seitenumfang, Inhalten und Integrationen ab. Ein Zeitplan wird erst nach Festlegung des Leistungsumfangs verbindlich vereinbart."],
+    ["Funktioniert die Website auf Deutsch und auf Mobilgeräten?", "Ja. Die Oberfläche unterstützt Arabisch von rechts nach links sowie Deutsch und Englisch von links nach rechts und wird nach dem Mobile-first-Prinzip entwickelt."],
+    ["Website oder App?", "Eine Website präsentiert Inhalte und erfasst Anfragen. Eine App ermöglicht umfangreichere Interaktionen; häufig reicht eine Web-App ohne separate App-Store-Anwendung aus."],
+    ["Was bedeutet Automatisierung?", "Wiederkehrende Schritte werden verbunden – etwa Anfrage erfassen, Daten speichern, Benachrichtigung senden und Aufgabe erstellen – nachdem die vorhandenen Werkzeuge geprüft wurden."],
+    ["Kann WhatsApp angebunden werden?", "Wir prüfen Konto, Rufnummer, verfügbare Meta-Schnittstellen und geltende Regeln. Die technische Verfügbarkeit wird nicht vorausgesetzt."],
+    ["Kann das Projekt später erweitert werden?", "Ja. Wir bevorzugen erweiterbare Grundlagen und können mit einem klar begrenzten Umfang beginnen."],
+    ["Gehören mir Domain, Website und Code?", "Eigentum, Übergabe, Konten und Lizenzen von Drittanbietern werden ausdrücklich im Angebot und Vertrag geregelt."],
+    ["Gibt es Support nach der Veröffentlichung?", "Ein schriftlich definierter Support- oder Wartungszeitraum kann vereinbart werden."],
+    ["Sind die Beispiele echte Kundenprojekte?", "Nein. Alle Beispiele verwenden fiktive Daten und stellen keine echten Kunden dar."],
+    ["Ist eine erste Kosteneinschätzung verbindlich?", "Derzeit werden keine Preise veröffentlicht. Eine erste Einschätzung wird erst nach bestätigtem Umfang und schriftlichem Angebot verbindlich."],
+  ],
 };
 
 export function ProcessAndTrust({ locale }: { locale: Locale }) {
   const ar = locale === "ar";
   const [open, setOpen] = useState(0);
-  const process = ar ? processAr : processEn;
-  const why = ar
-    ? ["تنفيذ وإدارة من ألمانيا", "تواصل باللغة العربية", "فهم للسوق العراقي", "تصميم مخصّص", "تحديد النطاق والتكلفة قبل التنفيذ", "أداء وحماية منذ البداية", "تسليم منظّم", "تقليل الاعتماد على مزوّد واحد"]
-    : ["Managed and delivered from Germany", "Arabic communication", "Understanding of the Iraqi market", "Tailored design", "Scope and cost confirmed first", "Performance and security by design", "Organised handover", "Avoid unnecessary vendor lock-in"];
+  const process = ar ? processAr : locale === "de" ? processDe : processEn;
+  const why = ar ? ["تنفيذ وإدارة من ألمانيا","تواصل بثلاث لغات","فهم للسوقين العراقي والألماني","تصميم مخصّص","تحديد النطاق والتكلفة قبل التنفيذ","أداء وحماية منذ البداية","تسليم منظّم","تقليل الاعتماد على مزوّد واحد"] : locale === "de" ? ["Umsetzung aus Deutschland","Kommunikation in drei Sprachen","Verständnis für den deutschen und irakischen Markt","Individuelles Design","Umfang und Kosten vorab geklärt","Leistung und Sicherheit von Anfang an","Strukturierte Übergabe","Keine unnötige Anbieterbindung"] : ["Managed and delivered from Germany","Communication in three languages","Understanding of Iraqi and German markets","Tailored design","Scope and cost confirmed first","Performance and security by design","Organised handover","Avoid unnecessary vendor lock-in"];
 
   return <>
     <section id="process" className="section process-section">
       <div className="container">
         <div className="section-heading split">
-          <div><span className="eyebrow">{ar ? "طريقة العمل" : "How the work progresses"}</span><h2>{ar ? "لكل مرحلة قرار واضح ومخرج مفهوم." : "Each stage has a clear decision and tangible outcome."}</h2></div>
-          <p>{ar ? "لا تُعتمد المواعيد قبل تحديد النطاق، واعتماد العرض، وتوفير العميل للمحتوى المطلوب." : "Dates are confirmed only after scope, quote and client content are ready."}</p>
+          <div><span className="eyebrow">{ar ? "طريقة العمل" : locale === "de" ? "Wie die Arbeit voranschreitet" : "How the work progresses"}</span><h2>{ar ? "لكل مرحلة قرار واضح ومخرج مفهوم." : locale === "de" ? "Jede Phase hat eine klare Entscheidung und ein greifbares Ergebnis." : "Each stage has a clear decision and tangible outcome."}</h2></div>
+          <p>{ar ? "لا تُعتمد المواعيد قبل تحديد النطاق، واعتماد العرض، وتوفير العميل للمحتوى المطلوب." : locale === "de" ? "Termine werden erst bestätigt, wenn Umfang, Angebot und Kundeninhalt vorliegen." : "Dates are confirmed only after scope, quote and client content are ready."}</p>
         </div>
         <ol className="process-grid">{process.map((item, i) => <li key={item}><span>{String(i + 1).padStart(2, "0")}</span><b>{item}</b></li>)}</ol>
       </div>
@@ -87,14 +106,14 @@ export function ProcessAndTrust({ locale }: { locale: Locale }) {
 
     <section id="why" className="section why-section">
       <div className="container why-layout">
-        <div><span className="eyebrow">{ar ? "لماذا هذا الأسلوب؟" : "Why this approach?"}</span><h2>{ar ? "تقنية تناسب العمل، لا استعراضًا تقنيًا." : "Technology that fits the business—not a technical showcase."}</h2><p>{ar ? "هدفنا أن تعرف ما الذي ستحصل عليه، ولماذا تحتاج إليه، وكيف يمكن تطويره مستقبلًا." : "You should know what you will receive, why it matters and how it can grow later."}</p><div className="why-experience"><span>2001—2026</span><p>{ar ? "خبرة تمتد إلى 25 عامًا في البرمجة وتطوير الأنظمة، تساعدنا على اختيار التقنية المناسبة وبناء حل يمكن صيانته وتطويره مستقبلًا." : "Twenty-five years in programming and systems development help us choose the right technology and build a solution that remains maintainable and ready to grow."}</p></div></div>
+        <div><span className="eyebrow">{ar ? "لماذا هذا الأسلوب؟" : locale === "de" ? "Warum dieser Ansatz?" : "Why this approach?"}</span><h2>{ar ? "تقنية تناسب العمل، لا استعراضًا تقنيًا." : locale === "de" ? "Technologie, die zum Unternehmen passt – kein technisches Schaufenster." : "Technology that fits the business—not a technical showcase."}</h2><p>{ar ? "هدفنا أن تعرف ما الذي ستحصل عليه، ولماذا تحتاج إليه، وكيف يمكن تطويره مستقبلًا." : locale === "de" ? "Sie sollten wissen, was Sie erhalten, warum es wichtig ist und wie es später wachsen kann." : "You should know what you will receive, why it matters and how it can grow later."}</p><div className="why-experience"><span>2001—2026</span><p>{ar ? "خبرة تمتد إلى 25 عامًا في البرمجة وتطوير الأنظمة، تساعدنا على اختيار التقنية المناسبة وبناء حل يمكن صيانته وتطويره مستقبلًا." : locale === "de" ? "25 Jahre Erfahrung in der Programmierung und Systementwicklung helfen uns dabei, die richtige Technologie auszuwählen und eine Lösung zu entwickeln, die wartbar und wachstumsbereit bleibt." : "Twenty-five years in programming and systems development help us choose the right technology and build a solution that remains maintainable and ready to grow."}</p></div></div>
         <div className="why-list">{why.map((item, i) => <div key={item}><span>{String(i + 1).padStart(2, "0")}</span><b>{item}</b><i>✓</i></div>)}</div>
       </div>
     </section>
 
     <section id="faq" className="section faq-section">
       <div className="container faq-layout">
-        <div className="section-heading"><span className="eyebrow">{ar ? "أسئلة قبل أن نبدأ" : "Questions before we begin"}</span><h2>{ar ? "إجابات مباشرة بلا وعود غير محسوبة." : "Direct answers without premature promises."}</h2></div>
+        <div className="section-heading"><span className="eyebrow">{ar ? "أسئلة قبل أن نبدأ" : locale === "de" ? "Fragen, bevor wir beginnen" : "Questions before we begin"}</span><h2>{ar ? "إجابات مباشرة بلا وعود غير محسوبة." : locale === "de" ? "Direkte Antworten ohne voreilige Versprechungen." : "Direct answers without premature promises."}</h2></div>
         <div className="faq-list">{faqs[locale].map(([q, a], i) => <article className={open === i ? "open" : ""} key={q}><button type="button" onClick={() => setOpen(open === i ? -1 : i)} aria-expanded={open === i}><span>{q}</span><i>{open === i ? "−" : "+"}</i></button><div><p>{a}</p></div></article>)}</div>
       </div>
     </section>

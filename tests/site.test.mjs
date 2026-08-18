@@ -14,12 +14,12 @@ test("central settings preserve final provider, contact, language and brand data
   assert.match(settings, /info@sifrsifr\.one/);
   assert.match(settings, /\+964 776 209 3683/);
   assert.match(settings, /Freiberuflich tätig/);
-  assert.match(settings, /supported: \["ar", "en"\]/);
-  assert.doesNotMatch(settings, /future:|"de"|\[PROJECT_NAME\]|\[اسم المشروع\]|\[DOMAIN_TO_BE_SELECTED_LATER\]|\[NEW_BUSINESS_EMAIL\]|\[VERIFY|\[TO_BE_ADDED\]/);
+  assert.match(settings, /supported: \["ar", "en", "de"\]/);
+  assert.doesNotMatch(settings, /future:|\[PROJECT_NAME\]|\[اسم المشروع\]|\[DOMAIN_TO_BE_SELECTED_LATER\]|\[NEW_BUSINESS_EMAIL\]|\[VERIFY|\[TO_BE_ADDED\]/);
   assert.doesNotMatch(settings, /ArabVergleich/);
 });
 
-test("Arabic, English, services, industries and B2B legal routes are data-driven", async () => {
+test("Arabic, English, German, services, industries and B2B legal routes are data-driven", async () => {
   const [services, industries, legal, localeLayout] = await Promise.all([
     read("src/content/services.ts"), read("src/content/industries.ts"),
     read("src/content/legalContent.ts"), read("app/[locale]/layout.tsx"),
@@ -32,6 +32,23 @@ test("Arabic, English, services, industries and B2B legal routes are data-driven
   assert.match(legal, /Resend/);
   assert.doesNotMatch(legal, /slug: "withdrawal"|14-day withdrawal|14 يومًا/);
   assert.match(localeLayout, /LocaleRuntime/);
+});
+
+test("Germany and Iraq locations are available in both enquiry forms", async () => {
+  const [locations, contact, wizard, projectRoute, sitemap, robots] = await Promise.all([
+    read("src/content/locales.ts"), read("src/components/ContactForm.tsx"),
+    read("src/components/ProjectWizard.tsx"), read("app/api/project/route.ts"),
+    read("app/sitemap.ts"), read("app/robots.ts"),
+  ]);
+  for (const value of ["IQ", "DE", "Nordrhein-Westfalen", "Bayern", "بغداد", "البصرة"]) assert.match(locations, new RegExp(value));
+  for (const source of [contact, wizard]) {
+    assert.match(source, /countries/);
+    assert.match(source, /regions/);
+    assert.match(source, /regionLabels/);
+  }
+  assert.match(projectRoute, /"country"/);
+  assert.match(sitemap, /siteSettings\.locale\.supported/);
+  assert.match(robots, /"\/de"/);
 });
 
 test("every service and industry detail page includes a contextual interactive demo", async () => {

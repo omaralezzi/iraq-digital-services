@@ -5,6 +5,7 @@ export const siteSettings = {
     tagline: {
       ar: "تقنيات حديثة، وتواصل بالعربية، وتنفيذ من ألمانيا.",
       en: "Modern technology, Arabic communication, delivery from Germany.",
+      de: "Moderne Technologie, persönliche Kommunikation und Umsetzung aus Deutschland.",
     },
   },
   provider: {
@@ -13,7 +14,7 @@ export const siteSettings = {
     professionalStatus: "Freiberuflich tätig",
     address: ["Vautierstr. 57", "40237 Düsseldorf", "Germany"],
     serviceLocation: "Germany",
-    targetMarket: "Iraq",
+    targetMarkets: ["Iraq", "Germany"],
   },
   contact: {
     domain: "sifrsifr.one",
@@ -25,9 +26,9 @@ export const siteSettings = {
   },
   locale: {
     default: "ar" as const,
-    supported: ["ar", "en"] as const,
+    supported: ["ar", "en", "de"] as const,
   },
-  legalReviewDate: "2026-08-17",
+  legalReviewDate: "2026-08-19",
 } as const;
 
 export type Locale = (typeof siteSettings.locale.supported)[number];

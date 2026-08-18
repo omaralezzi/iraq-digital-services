@@ -2,9 +2,9 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "sifrsifr.one — حلول رقمية للسوق العراقي",
+    name: "sifrsifr.one — حلول رقمية للعراق وألمانيا",
     short_name: "sifrsifr.one",
-    description: "مواقع وتطبيقات وأنظمة وأتمتة أعمال موجّهة إلى السوق العراقي.",
+    description: "مواقع وتطبيقات وأنظمة وأتمتة أعمال موجّهة إلى السوقين العراقي والألماني.",
     start_url: "/ar",
     scope: "/",
     display: "standalone",

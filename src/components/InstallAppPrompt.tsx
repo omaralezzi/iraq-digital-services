@@ -76,42 +76,42 @@ export function InstallAppPrompt({ locale }: { locale: Locale }) {
 
   const guides = {
     ios: {
-      title: ar ? "التثبيت على iPhone أو iPad" : "Install on iPhone or iPad",
-      body: ar ? "افتح الموقع في Safari، واضغط زر المشاركة، ثم اختر «إضافة إلى الشاشة الرئيسية» واضغط «إضافة»." : "Open the site in Safari, tap Share, choose “Add to Home Screen”, then tap “Add”.",
+      title: ar ? "التثبيت على iPhone أو iPad" : locale === "de" ? "Auf iPhone oder iPad installieren" : "Install on iPhone or iPad",
+      body: ar ? "افتح الموقع في Safari، واضغط زر المشاركة، ثم اختر «إضافة إلى الشاشة الرئيسية» واضغط «إضافة»." : locale === "de" ? "Öffnen Sie die Site in Safari, tippen Sie auf „Teilen“, wählen Sie „Zum Startbildschirm hinzufügen“ und tippen Sie dann auf „Hinzufügen“." : "Open the site in Safari, tap Share, choose “Add to Home Screen”, then tap “Add”.",
       mark: "↥",
     },
     "mac-safari": {
-      title: ar ? "التثبيت على Mac" : "Install on Mac",
-      body: ar ? "من قائمة «ملف» في Safari اختر «إضافة إلى Dock». سيظهر الموقع كتطبيق مستقل." : "In Safari, open the File menu and choose “Add to Dock”. The site will open as a standalone app.",
+      title: ar ? "التثبيت على Mac" : locale === "de" ? "Auf Mac installieren" : "Install on Mac",
+      body: ar ? "من قائمة «ملف» في Safari اختر «إضافة إلى Dock». سيظهر الموقع كتطبيق مستقل." : locale === "de" ? "Öffnen Sie in Safari das Menü „Datei“ und wählen Sie „Zum Dock hinzufügen“. Die Website wird als eigenständige App geöffnet." : "In Safari, open the File menu and choose “Add to Dock”. The site will open as a standalone app.",
       mark: "+",
     },
     browser: {
-      title: ar ? "التثبيت من المتصفح" : "Install from your browser",
-      body: ar ? "افتح قائمة المتصفح، ثم اختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية». قد يظهر خيار التثبيت أيضًا بجوار شريط العنوان." : "Open the browser menu, then choose “Install app” or “Add to Home Screen”. The install icon may also appear in the address bar.",
+      title: ar ? "التثبيت من المتصفح" : locale === "de" ? "Installieren Sie es über Ihren Browser" : "Install from your browser",
+      body: ar ? "افتح قائمة المتصفح، ثم اختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية». قد يظهر خيار التثبيت أيضًا بجوار شريط العنوان." : locale === "de" ? "Öffnen Sie das Browsermenü und wählen Sie dann „App installieren“ oder „Zum Startbildschirm hinzufügen“. Das Installationssymbol wird möglicherweise auch in der Adressleiste angezeigt." : "Open the browser menu, then choose “Install app” or “Add to Home Screen”. The install icon may also appear in the address bar.",
       mark: "⋮",
     },
   } satisfies Record<InstallGuide, { title: string; body: string; mark: string }>;
 
   return <>
-    {visible && <aside className={`install-suggestion${installed ? " installed" : ""}`} aria-live="polite" aria-label={ar ? "تثبيت sifrsifr.one كتطبيق" : "Install sifrsifr.one as an app"}>
+    {visible && <aside className={`install-suggestion${installed ? " installed" : ""}`} aria-live="polite" aria-label={ar ? "تثبيت sifrsifr.one كتطبيق" : locale === "de" ? "Installieren Sie sifrsifr.one als App" : "Install sifrsifr.one as an app"}>
       <span className="install-app-icon" aria-hidden="true"><img src="/app-icon-512.png" alt="" width="48" height="48" /></span>
       <span className="install-copy">
-        <small>{installed ? (ar ? "أصبح جاهزًا" : "Ready to use") : (ar ? "وصول مباشر" : "Direct access")}</small>
-        <strong>{installed ? (ar ? "تم تثبيت sifrsifr.one على جهازك" : "sifrsifr.one is installed on your device") : (ar ? "ثبّت sifrsifr.one على جهازك" : "Install sifrsifr.one on your device")}</strong>
-        <em>{ar ? "افتحه من الشاشة الرئيسية أو سطح المكتب، مثل أي تطبيق." : "Open it from your home screen or desktop, just like an app."}</em>
+        <small>{installed ? (ar ? "أصبح جاهزًا" : locale === "de" ? "Gebrauchsfertig" : "Ready to use") : (ar ? "وصول مباشر" : locale === "de" ? "Direkter Zugriff" : "Direct access")}</small>
+        <strong>{installed ? (ar ? "تم تثبيت sifrsifr.one على جهازك" : locale === "de" ? "sifrsifr.one ist auf Ihrem Gerät installiert" : "sifrsifr.one is installed on your device") : (ar ? "ثبّت sifrsifr.one على جهازك" : locale === "de" ? "Installieren Sie sifrsifr.one auf Ihrem Gerät" : "Install sifrsifr.one on your device")}</strong>
+        <em>{ar ? "افتحه من الشاشة الرئيسية أو سطح المكتب، مثل أي تطبيق." : locale === "de" ? "Öffnen Sie es von Ihrem Startbildschirm oder Desktop aus, genau wie eine App." : "Open it from your home screen or desktop, just like an app."}</em>
       </span>
-      {!installed && <button className="install-action" type="button" onClick={requestInstall}><span aria-hidden="true">↓</span>{ar ? "تثبيت" : "Install"}</button>}
-      <button className="install-dismiss" type="button" aria-label={ar ? "إغلاق اقتراح التثبيت" : "Dismiss install suggestion"} onClick={dismiss}>×</button>
+      {!installed && <button className="install-action" type="button" onClick={requestInstall}><span aria-hidden="true">↓</span>{ar ? "تثبيت" : locale === "de" ? "Installieren" : "Install"}</button>}
+      <button className="install-dismiss" type="button" aria-label={ar ? "إغلاق اقتراح التثبيت" : locale === "de" ? "Installationsvorschlag verwerfen" : "Dismiss install suggestion"} onClick={dismiss}>×</button>
     </aside>}
 
     {guide && <div className="install-guide-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setGuide(null); }}>
       <section className="install-guide" role="dialog" aria-modal="true" aria-labelledby="install-guide-title">
-        <button className="install-guide-close" type="button" aria-label={ar ? "إغلاق التعليمات" : "Close instructions"} onClick={() => setGuide(null)}>×</button>
+        <button className="install-guide-close" type="button" aria-label={ar ? "إغلاق التعليمات" : locale === "de" ? "Anweisungen schließen" : "Close instructions"} onClick={() => setGuide(null)}>×</button>
         <span className="install-guide-mark" aria-hidden="true">{guides[guide].mark}</span>
-        <small>{ar ? "خطوة واحدة فقط" : "Just one step"}</small>
+        <small>{ar ? "خطوة واحدة فقط" : locale === "de" ? "Nur ein Schritt" : "Just one step"}</small>
         <h2 id="install-guide-title">{guides[guide].title}</h2>
         <p>{guides[guide].body}</p>
-        <button className="button primary full" type="button" onClick={() => setGuide(null)}>{ar ? "فهمت" : "Got it"}</button>
+        <button className="button primary full" type="button" onClick={() => setGuide(null)}>{ar ? "فهمت" : locale === "de" ? "Habe es" : "Got it"}</button>
       </section>
     </div>}
   </>;

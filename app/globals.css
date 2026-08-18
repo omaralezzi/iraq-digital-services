@@ -46,6 +46,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .nav-links a:hover { color: var(--paper); }
 .nav-actions { display: flex; align-items: center; gap: 8px; }
 .lang-switch, .lite-toggle, .wa-button { border: 1px solid var(--line); background: rgba(255,255,255,.03); color: var(--cream); min-height: 38px; border-radius: 11px; padding: 8px 11px; font-size: 11px; cursor: pointer; }
+.language-menu { display: flex; align-items: center; gap: 2px; min-height: 38px; padding: 3px; border: 1px solid var(--line); border-radius: 11px; background: rgba(255,255,255,.03); }
+.language-menu a { min-width: 30px; padding: 6px; border-radius: 7px; color: var(--muted); text-align: center; font-size: 9px; font-weight: 800; }
+.language-menu a.active { background: var(--cyan); color: #04121d; }
 .wa-button { display: inline-flex; align-items: center; gap: 6px; color: #77dbb7; font: 700 9px var(--font-latin), sans-serif; transition: border-color .2s, background .2s, color .2s; }.wa-button svg { width: 15px; height: 15px; }.wa-button:hover { color: #9af0d2; border-color: rgba(119,219,183,.42); background: rgba(37,211,102,.08); }
 .lite-toggle { display: flex; align-items: center; gap: 6px; }
 .lite-toggle span { color: var(--amber); }
